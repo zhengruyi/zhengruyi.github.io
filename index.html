@@ -152,9 +152,159 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HashMap-源代码分析" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/HashMap-源代码分析/">HashMap 源代码分析</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/HashMap-源代码分析/" class="archive-article-date">
+  	<time datetime="2019-08-07T20:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/HashMap.jpg" alt=""></p>
+<p>终于开始实习了，终于有机会可以把自己的脑子里的思路好好理一理。希望自己可以一直把写博客的习惯坚持下去。废话不多说进入正题.</p>
+<h3 id="1-HashMap的结构如下图："><a href="#1-HashMap的结构如下图：" class="headerlink" title="1.HashMap的结构如下图："></a>1.HashMap的结构如下图：</h3><p><img src="/images/hashmap_strcture.jpg" alt=""><br>假设我们希望用HashMap来保存一系列人名，使用hash函数进行计算后对255取模，得到的就是数就是存储的在数组中的位置，但是hash算法存在一种特殊的情况，称为hash冲突，即两个不同的元素进行hash运算后却得到了两个完全相同的数，如果不作处理，则后来的数据将会覆盖先前的数据。</p>
+<h6 id="Hash冲突的解决方法："><a href="#Hash冲突的解决方法：" class="headerlink" title="Hash冲突的解决方法："></a>Hash冲突的解决方法：</h6><p>1.使用数组加链表的组合存储(有限+无限),当有hash冲突时则将后来的元素存储在链表里面，并且跟在先前元素后面。这种方法设计简单，但是要求hash算法拥有很强的性能，可以将元素均匀的分布在数组里。极端情况下，所有元素经过hash后都是同一个数值，则hash表退化成链表，查找的复杂度变成O(n),解决的方法是当链表长度达到一个阈值时进行树化（红黑树，因为具有稳定的查询复杂度O(logN)).</p>
+<p>2.另外一种方法是依然只采用数组进行存储，但是当遇到hash冲突时，依据顺序向下平移直到找到一个空的位置，把数组保存在这里。查找时如果在计算后的位置没能找到数据，则继续向下平移直到遇到一个空位，则表示hash表里没有要查询的数据.这种方法很少使用，因为较为复杂，节省的空间有限。用空间换时间的方法1被大量采用.</p>
+<h3 id="2-HashMap的特点："><a href="#2-HashMap的特点：" class="headerlink" title="2.HashMap的特点："></a>2.HashMap的特点：</h3><p>适合于等值查询，正常情况（无hash冲突的情况下），查找的复杂度为O(1)=&gt;因为通过对输入值进行hash运算，可以直接得到一个位置信息，然后到数组对应的位置获取相应的数据就可以了。数组的寻址操作复杂度也是O(1).所以整个等值查询的过程复杂度为1.</p>
+<p>但是对于范围查询，Hash表的表现则是很差，因为hash函数并不能保证数据的相对有序性(10&gt;9 but hash(10)&lt;hash(9)这种特殊情况),所以如果用hash表进行范围查询则会有巨大的性能开销,<br>因为我们需要对每个在范围内的数值都要进行hash运算。如果程序需要进行大量范围查询则建议采用其他的数据结构.</p>
+<h3 id="3-HashMap的结构"><a href="#3-HashMap的结构" class="headerlink" title="3.HashMap的结构:"></a>3.HashMap的结构:</h3><p>继承了AbstractMap类，并且实现了Map,Clonable,Serializable等接口。</p>
+<h3 id="4-HashMap的源码分析"><a href="#4-HashMap的源码分析" class="headerlink" title="4.HashMap的源码分析:"></a>4.HashMap的源码分析:</h3><p>1.HashMap与HashTable的区别在于:HashMap何以存放空值，并且它是非线程安全的，也就是说如果要在多线程程序中使用，需要自己额外添加同步的代码块.</p>
+<p>2.HashMap不能保证键的相对顺序不变，对于get和put操作，拥有很好的性能，可以短时间内在大量数据中快速进行查找操作.</p>
+<p>3.HashMap的两个重要的参数：初始容量和负载系数。默认初始容量为1&lt;&lt;4=16,默认初始负载系数为0.75.由于迭代的耗时和HashMap大小直接相关，所以如果要频繁进行迭代操作则不要将初始容量设置过大或者负载系数设置过低。</p>
+<p>4.当表内存放的元素数目达到初始容量*负载系数时，就会启动自动扩容操作，对表内的所有元素进行重新hash操作，该操作耗时较长，如果可以确定表内存放的最多的元素数量可以设置合理的大小来避免表进行扩容</p>
+<p>5.扩容策略：Hash表每次扩容都会将容量扩大为原来的两倍，原因是在java中&amp;按为与操作比取余和除法快十倍以上，为了性能考虑才会这么设置,具体看<a href="https://blog.csdn.net/u014532901/article/details/78936283" target="_blank" rel="noopener"><strong>这篇博客</strong></a></p>
+<p>6.如果找不到外部可以用来作为锁的控制对象，可以用以下这个类来进行包裹，保证同步性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.synchronizedMap(new HashMap&lt;&gt;());</span><br></pre></td></tr></table></figure></p>
+<p>7.当使用创建迭代器来遍历HashMap后，HashMap发生了结构化的变化(发生了数据的增加和删除操作，数据的修改则不属于结构化的变化)，则HashMap会抛出一个异常，然后快速失败(fast-fail).需要注意的是HashMap只能尽力抛出异常，并不能保证。所以程序不可以依赖这个异常来执行操作.</p>
+<p>8.当HashMap里的某个位置后面所连接的链表长度大于8时，就会发生树化，即采用树结构来代替链表，因为这样可以支持高速的查找操作。在最坏的情况下,链表的查找时间复杂度为O(n),而采用红黑树这种结构，他的添加，查找，删除操作的最坏时间复杂度都是O(logn).当树上的元素小于6时，则红黑树又会退化成链表,但是树化后，节点的大小近似为原来的两倍大小，所以占用了更多的内存.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java源代码分析//" class="article-tag-list-link color5">Java源代码分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/HashMap-源代码分析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-index" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/18/index/">如何创建GitHub上面的个人免费博客</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/18/index/" class="archive-article-date">
+  	<time datetime="2018-11-18T21:55:43.677Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>免费个人博客搭建， 这是一篇小白也能看懂的文章，本文主要针对OS X ，Windows 除了软件安装方式和命令有些区别（装了git bash也一样），其他基本一样。</p>
+<p>首先列出来两个博客的样式供参考：<br><img src="https://raw.githubusercontent.com/ly92/images/master/BeforeCreateBlog/BeforeCreateBlog_1.png" alt="image"><br><img src="https://raw.githubusercontent.com/ly92/images/master/BeforeCreateBlog/BeforeCreateBlog_2.png" alt="image"></p>
+<p>作者：勇不言弃92<br>链接：<a href="https://www.jianshu.com/p/04be393f2f11" target="_blank" rel="noopener">https://www.jianshu.com/p/04be393f2f11</a><br>來源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/18/index/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
   
 
