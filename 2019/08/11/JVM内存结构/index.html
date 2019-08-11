@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
-  <title>Archives | 巴黎 ITer~ |Ruyi.Blog</title>
+  <title>JVM内存结构 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:url" content="https://zhengruyi.github.io/archives/index.html">
+  <meta name="description" content="JVM介绍：JVM全称Java Virtual Machine,是java平台无关的重要组成部分，所有的java代码都会在被编译器编译后保存成字节码文件，而怎么来运行程序呢，当在代码中第一次调用某个方法时会通过类加载机制把类的字节码加载到JVM中，并由JVM解释执行。换句话说JAVA代码经过一次编译后,即可以在任何运行JVM的操作系统上执行。这就形成了所谓的平台无关性。JVM全称Java Virt">
+<meta name="keywords" content="JVM内存结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM内存结构">
+<meta property="og:url" content="https://zhengruyi.github.io/2019/08/11/JVM内存结构/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
+<meta property="og:description" content="JVM介绍：JVM全称Java Virtual Machine,是java平台无关的重要组成部分，所有的java代码都会在被编译器编译后保存成字节码文件，而怎么来运行程序呢，当在代码中第一次调用某个方法时会通过类加载机制把类的字节码加载到JVM中，并由JVM解释执行。换句话说JAVA代码经过一次编译后,即可以在任何运行JVM的操作系统上执行。这就形成了所谓的平台无关性。JVM全称Java Virt">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/08/12/Iz1eDxOrMbhiFRT.jpg">
+<meta property="og:updated_time" content="2019-08-11T21:09:15.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="巴黎 ITer~ |Ruyi.Blog">
+<meta name="twitter:title" content="JVM内存结构">
+<meta name="twitter:description" content="JVM介绍：JVM全称Java Virtual Machine,是java平台无关的重要组成部分，所有的java代码都会在被编译器编译后保存成字节码文件，而怎么来运行程序呢，当在代码中第一次调用某个方法时会通过类加载机制把类的字节码加载到JVM中，并由JVM解释执行。换句话说JAVA代码经过一次编译后,即可以在任何运行JVM的操作系统上执行。这就形成了所谓的平台无关性。JVM全称Java Virt">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/12/Iz1eDxOrMbhiFRT.jpg">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -234,36 +241,200 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM内存结构" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/JVM内存结构/" class="archive-article-date">
-  	<time datetime="2019-08-11T18:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/JVM内存结构/">JVM内存结构</a>
+    <h1 class="article-title" itemprop="name">
+      JVM内存结构
     </h1>
   
 
-        <div class="article-info info-on-right">
+        <!--显示阅读次数-->
+
+ <br>
+ <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+ <span class="icon-sort"></span>
+ <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+ </span>
+ </a>
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/08/11/JVM内存结构/" class="archive-article-date">
+  	<time datetime="2019-08-11T18:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+
           
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JVM介绍："><a href="#JVM介绍：" class="headerlink" title="JVM介绍："></a>JVM介绍：</h3><p><strong><em>JVM</em></strong>全称Java Virtual Machine,是java平台无关的重要组成部分，所有的java代码都会在被编译器编译后保存成<strong><em>字节码文件</em></strong>，而怎么来运行程序呢，当在代码中第一次调用某个方法时会通过<strong><em>类加载机制</em></strong>把类的字节码加载到<strong><em>JVM</em></strong>中，并由JVM解释执行。换句话说JAVA代码经过一次编译后,即可以在任何运行JVM的操作系统上执行。这就形成了所谓的平台无关性。<br><strong><em>JVM</em></strong>全称Java Virtual Machine,是java平台无关的重要组成部分，所有的java代码都会在被编译器编译后保存成<strong><em>字节码文件</em></strong>，而怎么来运行程序呢，当在代码中第一次调用某个方法时会通过<strong><em>类加载机制</em></strong>把类的字节码加载到<strong><em>JVM</em></strong>中，并由JVM解释执行。换句话说JAVA代码经过一次编译后,即可以在任何运行JVM的操作系统上执行。这就形成了所谓的平台无关性。</p>
+<p>作为一名JAVA后端🐶，当然要知其所以然。这里推荐一本JVM必读书,《深入了解JAVA虚拟机》Writteb By 周志明。这本书及其经典，所以如果想详细了解运行原理的请去阅读这本书.废话说完了，开始正文。</p>
+<h5 id="JVM内存布局如下图"><a href="#JVM内存布局如下图" class="headerlink" title="JVM内存布局如下图:"></a>JVM内存布局如下图:</h5><p><img src="https://i.loli.net/2019/08/12/Iz1eDxOrMbhiFRT.jpg" alt="JVM_memory.jpg"><br>下面对于各个不同部分进行详细讲解:</p>
+<h6 id="方法区（Method-Area"><a href="#方法区（Method-Area" class="headerlink" title="方法区（Method Area):"></a>方法区（Method Area):</h6><ol>
+<li><p>由各个线程共享的区域</p>
+</li>
+<li><p>用于存储已被虚拟机加载的类信息，常量，静态变量和被即时编译器(JNI)编译后的代码等数据，为了把它和Java堆区分开来，一般称为非堆（No-Heap).</p>
+</li>
+<li><p>和Java堆一样不需要连续的内存和可以选择固定大小和可扩展外，也可以选择不实现垃圾收集，这取决不同的虚拟机种类。</p>
+</li>
+<li><p>该区域的内存回收目标主要针对常量池（详见字节码文章）的回收和对类型的卸载(一般很难被回收，因为条件很苛刻),当方法区无法满足内存分配需求时，则会抛出OOM（out of memory)异常.</p>
+</li>
+</ol>
+<h6 id="虚拟机栈（VM-Stack"><a href="#虚拟机栈（VM-Stack" class="headerlink" title="虚拟机栈（VM Stack):"></a>虚拟机栈（VM Stack):</h6><ol>
+<li><p>线程私有，生命周期和线程相同，它所表示的是java方法执行的内存模型。</p>
+</li>
+<li><p>每个方法在执行时都会创建一个栈帧，用来存储局部变量表，操作数栈，动态链接，方法出口等信息等，方法从调用到执行完成的过程对应着一个栈帧在虚拟机栈中入栈到出栈的过程。常说的Java的栈内存就是说的虚拟机栈。</p>
+</li>
+<li><p>局部变量表中存放了八种基本数据类型(booleanbyte,char,short,int,long,float,double),对象引用（一个只想对象起始地址的引用指针)和returnAddress地址。</p>
+</li>
+<li><p>如果线程请求的栈深度大于虚拟机所允许的最大深度，则抛出StackOverFlow异常，如果虚拟机可以动态扩展，但是申请不到内存时则会抛出OOM异常。</p>
+</li>
+</ol>
+<h6 id="本地方法栈-Native-Method-Stack"><a href="#本地方法栈-Native-Method-Stack" class="headerlink" title="本地方法栈(Native Method Stack):"></a>本地方法栈(Native Method Stack):</h6><ol>
+<li><p>线程私有</p>
+</li>
+<li><p>和虚拟机栈相似，只不过虚拟机栈是用来执行Java方法的，而本地方方法栈则是用来存储虚拟机使用的Native方法。</p>
+</li>
+<li><p>抛出的异常种类和虚拟机栈完全一样。</p>
+</li>
+</ol>
+<h6 id="程序计数器（Programme-Counter-Register"><a href="#程序计数器（Programme-Counter-Register" class="headerlink" title="程序计数器（Programme Counter Register):"></a>程序计数器（Programme Counter Register):</h6><ol>
+<li><p>线程私有，因为Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，任何时刻一个内核只能执行一条线程的指令，为了线程切换后可以换辅导正确的位置，所以每个线程都拥有一个独立的程序计数器。我们称这部分为线程私有内存.</p>
+</li>
+<li><p>如果线程正在执行一个Java方法，那么这个计数器记录正在执行的虚拟机字节码指令的地址，如果执行的是Native方法，则这个计数器的数值为空(Undefinied)</p>
+</li>
+<li><p>这个区域是唯一一个没有规定OOM异常的区域。</p>
+</li>
+</ol>
+<h6 id="Java-堆-Heap-："><a href="#Java-堆-Heap-：" class="headerlink" title="Java 堆(Heap)："></a>Java 堆(Heap)：</h6><ol>
+<li><p>Java堆是虚拟机管理的内存中最大的一块，被所有线程共享，在虚拟机启动时创建。所有的对象以及数组都要在堆上分配。</p>
+</li>
+<li><p>Java堆是垃圾收集器管理的主要区域，因此常被称为GC堆。具体的分代和垃圾收集算法抽出来另外做一章。</p>
+</li>
+<li><p>Java堆可以处于物理上不连续的内存空间上，只需要在逻辑上连续就可以。当前主流虚拟机都是按照可扩展来实现的。</p>
+</li>
+<li><p>当内存上不够分配时会抛出OOM异常。</p>
+</li>
+</ol>
+
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+
+
+ <div class="declare">
+   <strong>本文作者：</strong>
+   
+     Zheng Ruyi
+   
+   <br>
+   <strong>本文链接：</strong>
+   <a rel="license" href="https://zhengruyi.github.io/2019/08/11/JVM内存结构/">https://zhengruyi.github.io/2019/08/11/JVM内存结构/</a>
+   <br>
+   <strong>版权声明：</strong>
+   本作品采用
+   <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+   进行许可。转载请注明出处！
+   
+     <br>
+     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+   
+ </div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -275,7 +446,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -288,115 +459,136 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/08/11/JVM内存结构/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/HashMap-源代码分析/" class="archive-article-date">
-  	<time datetime="2019-08-07T20:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/07/HashMap-源代码分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HashMap 源代码分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/HashMap-源代码分析/">HashMap 源代码分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java源代码分析//" class="article-tag-list-link color5">Java源代码分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/01/index/" class="archive-article-date">
-  	<time datetime="2019-08-01T13:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/01/index/">个人介绍</a>
-    </h1>
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTk2MS8yMjQ3Mg==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">主页</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+
+
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -422,8 +614,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
