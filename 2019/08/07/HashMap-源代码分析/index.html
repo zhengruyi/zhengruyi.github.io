@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhengruyi.github.io/images/HashMap.jpg">
 <meta property="og:image" content="https://zhengruyi.github.io/images/hashmap_strcture.jpg">
-<meta property="og:updated_time" content="2019-08-11T18:11:25.854Z">
+<meta property="og:updated_time" content="2019-08-11T21:42:53.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap 源代码分析">
 <meta name="twitter:description" content="终于开始实习了，终于有机会可以把自己的脑子里的思路好好理一理。希望自己可以一直把写博客的习惯坚持下去。废话不多说进入正题. 1.HashMap的结构如下图：假设我们希望用HashMap来保存一系列人名，使用hash函数进行计算后对255取模，得到的就是数就是存储的在数组中的位置，但是hash算法存在一种特殊的情况，称为hash冲突，即两个不同的元素进行hash运算后却得到了两个完全相同的数，如果">
@@ -301,7 +301,7 @@ var _hmt = _hmt || [];
       
         <p><img src="/images/HashMap.jpg" alt=""></p>
 <p>终于开始实习了，终于有机会可以把自己的脑子里的思路好好理一理。希望自己可以一直把写博客的习惯坚持下去。废话不多说进入正题.</p>
-<h3 id="1-HashMap的结构如下图："><a href="#1-HashMap的结构如下图：" class="headerlink" title="1.HashMap的结构如下图："></a>1.HashMap的结构如下图：</h3><p><img src="/images/hashmap_strcture.jpg" alt=""><br>假设我们希望用HashMap来保存一系列人名，使用hash函数进行计算后对255取模，得到的就是数就是存储的在数组中的位置，但是hash算法存在一种特殊的情况，称为hash冲突，即两个不同的元素进行hash运算后却得到了两个完全相同的数，如果不作处理，则后来的数据将会覆盖先前的数据。</p>
+<h3 id="1-HashMap的结构如下图："><a href="#1-HashMap的结构如下图：" class="headerlink" title="1.HashMap的结构如下图："></a>1.HashMap的结构如下图：</h3><p><img src="/images/hashmap_strcture.jpg" alt=""><br>假设我们希望用HashMap来保存一系列人名，使用hash函数进行计算后对255取模，得到的就是数就是存储的在数组中的位置，但是hash算法存在一种特殊的情况，称为hash冲突，即两个不同的元素进行hash运算后却得到了两个完全相同的数，如果不作处理，则后来的数据将会覆盖先前的数据。<br><a id="more"></a>&gt;&gt;</p>
 <h6 id="Hash冲突的解决方法："><a href="#Hash冲突的解决方法：" class="headerlink" title="Hash冲突的解决方法："></a>Hash冲突的解决方法：</h6><p>1.使用数组加链表的组合存储(有限+无限),当有hash冲突时则将后来的元素存储在链表里面，并且跟在先前元素后面。这种方法设计简单，但是要求hash算法拥有很强的性能，可以将元素均匀的分布在数组里。极端情况下，所有元素经过hash后都是同一个数值，则hash表退化成链表，查找的复杂度变成O(n),解决的方法是当链表长度达到一个阈值时进行树化（红黑树，因为具有稳定的查询复杂度O(logN)).</p>
 <p>2.另外一种方法是依然只采用数组进行存储，但是当遇到hash冲突时，依据顺序向下平移直到找到一个空的位置，把数组保存在这里。查找时如果在计算后的位置没能找到数据，则继续向下平移直到遇到一个空位，则表示hash表里没有要查询的数据.这种方法很少使用，因为较为复杂，节省的空间有限。用空间换时间的方法1被大量采用.</p>
 <h3 id="2-HashMap的特点："><a href="#2-HashMap的特点：" class="headerlink" title="2.HashMap的特点："></a>2.HashMap的特点：</h3><p>适合于等值查询，正常情况（无hash冲突的情况下），查找的复杂度为O(1)=&gt;因为通过对输入值进行hash运算，可以直接得到一个位置信息，然后到数组对应的位置获取相应的数据就可以了。数组的寻址操作复杂度也是O(1).所以整个等值查询的过程复杂度为1.</p>
