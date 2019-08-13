@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zhengruyi.github.io/images/HashMap.jpg">
 <meta property="og:image" content="https://zhengruyi.github.io/images/hashmap_strcture.jpg">
-<meta property="og:updated_time" content="2019-08-11T22:44:05.876Z">
+<meta property="og:updated_time" content="2019-08-13T20:32:32.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap 源代码分析">
 <meta name="twitter:description" content="终于开始实习了，终于有机会可以把自己的脑子里的思路好好理一理。希望自己可以一直把写博客的习惯坚持下去。废话不多说进入正题.">
@@ -286,7 +286,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.4k字</span>
+        <span class="post-count">2k字</span>
       </span>
     </span>
 
@@ -295,7 +295,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -324,6 +324,42 @@ var _hmt = _hmt || [];
 <p>6.如果找不到外部可以用来作为锁的控制对象，可以用以下这个类来进行包裹，保证同步性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.synchronizedMap(new HashMap&lt;&gt;());</span><br></pre></td></tr></table></figure></p>
 <p>7.当使用创建迭代器来遍历HashMap后，HashMap发生了结构化的变化(发生了数据的增加和删除操作，数据的修改则不属于结构化的变化)，则HashMap会抛出一个异常，然后快速失败(fast-fail).需要注意的是HashMap只能尽力抛出异常，并不能保证。所以程序不可以依赖这个异常来执行操作.</p>
 <p>8.当HashMap里的某个位置后面所连接的链表长度大于8时，就会发生树化，即采用树结构来代替链表，因为这样可以支持高速的查找操作。在最坏的情况下,链表的查找时间复杂度为O(n),而采用红黑树这种结构，他的添加，查找，删除操作的最坏时间复杂度都是O(logn).当树上的元素小于6时，则红黑树又会退化成链表,但是树化后，节点的大小近似为原来的两倍大小，所以占用了更多的内存.</p>
+<h3 id="2-HashMap源代码"><a href="#2-HashMap源代码" class="headerlink" title="2.HashMap源代码:"></a>2.HashMap源代码:</h3><p>在 jdk1.8中,HashMap的hashcode()的实现方法:Objects.hashcode(Key)^Objects.hashCode(value);那么HashMap是怎么实现查找过程的呢？</p>
+<p>在这之前需要明白两个函数的区别，hashcode和equals.简单来说，equals方法是对同一个对象实例的比较;而（a==b）比较的是两个对象的内存地址，也就是物理比较。hashcode的方法可以理解成对两个对象运用hash算法生成的描述符的比较。尽管现在的hash算法的碰撞几率已经很小，但是仍然不能保证冲撞几率为0.</p>
+<p>所以总结的表格如下：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th style="text-align:center">结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两个对象equals</td>
+<td style="text-align:center">它们的hashcode一定相等</td>
+</tr>
+<tr>
+<td>两个对象不equals</td>
+<td style="text-align:center">它们的hashcode可能相等</td>
+</tr>
+<tr>
+<td>两个对象hashcode相等</td>
+<td style="text-align:center">它不一定equals</td>
+</tr>
+<tr>
+<td>两个对象hashcode不相等</td>
+<td style="text-align:center">它们一定不equals</td>
+</tr>
+</tbody>
+</table>
+<p>我们都知道当调用HashMap的get方法时，我们会首先对传入的键值进行hash计算，具体用什么方法呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(key==null)?0:(h=key.hashcode())^(h&gt;&gt;&gt;16)</span><br></pre></td></tr></table></figure></p>
+<p>总结起来就是，将key的hash值得高16位和低16位进行异或运算得到结果。</p>
+<p>在计算得到hashmap中的bucket的位置后，在bucket里面的链表或者红黑树进行查找，在这个过程中equals方法确保准确找到对象。我们都知道hashMap的初始容量为16，并且每次扩容后都会达到原来的两倍，而且作者也在注释中不断强调2的次方这个概念。为什么呢？</p>
+<p>答案是<strong>提高性能</strong>，因为一个有趣的现象，因为hash计算后需要对HashMap的bucket取余，才能知道要放在哪个桶中，但是取余的操作很慢，而如果取余的对象是2的次方，就可以将取余操作转化异或操作。这回大大提高性能。</p>
+<p>灵魂第二问，在HashMap扩容后怎么知道该把元素放在哪里呢？</p>
+<p>答案是<strong>要么在原位置，要么在原位置加上原始容量的位置</strong>，举个🌰，元素hash后的结果是27，有4个bucket，那么扩容前后这个元素都在3这个位置上.而对于hash值是13的元素则大不一样，扩容前在3bucket上，扩容后变成了15%8=7。那怎么判断呢？</p>
+<p> <strong>当hash值和bucket数目异或为0时，扩容后元素会留在原位置，而初始异或不是0的则会在原来基础上再加上初始容量，就是元素在新表中的位置</strong>.</p>
 
       
 
