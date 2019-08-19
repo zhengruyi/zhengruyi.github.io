@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
-  <title>算法刷题-1 | 巴黎 ITer~ |Ruyi.Blog</title>
+  <title>JVM类加载过程 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="算法开篇:算法作为每个互联网公司都必考的内容，是每个ITer求职路上的拦路虎,但也是每个人都必须要克服的一关，我一直梦想能进微软这样的一线互联网企业，想就有用了吗？算法过关了吗？所以这次下定决心一步一个脚印，把算法关卡攻克过去。 其实算法的本质是把实际问题抽象化为某种具体数据结构并且应用的过程，所以算法的学习可以细分成三个部分：  切碎知识点, 为了记忆的方便，我们把数据结构分为线性和非线性，线性">
-<meta name="keywords" content="Algorithm ">
+  <meta name="description" content="JVM类加载过程： 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的?  类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括加载，验证，准备，解析，初始化，使用和卸载总共7个阶段，而其中验证，">
+<meta name="keywords" content="JVM内存结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法刷题-1">
-<meta property="og:url" content="https://zhengruyi.github.io/2019/08/17/算法刷题-1/index.html">
+<meta property="og:title" content="JVM类加载过程">
+<meta property="og:url" content="https://zhengruyi.github.io/2019/08/18/JVM类加载过程/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:description" content="算法开篇:算法作为每个互联网公司都必考的内容，是每个ITer求职路上的拦路虎,但也是每个人都必须要克服的一关，我一直梦想能进微软这样的一线互联网企业，想就有用了吗？算法过关了吗？所以这次下定决心一步一个脚印，把算法关卡攻克过去。 其实算法的本质是把实际问题抽象化为某种具体数据结构并且应用的过程，所以算法的学习可以细分成三个部分：  切碎知识点, 为了记忆的方便，我们把数据结构分为线性和非线性，线性">
+<meta property="og:description" content="JVM类加载过程： 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的?  类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括加载，验证，准备，解析，初始化，使用和卸载总共7个阶段，而其中验证，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/08/18/OYtIL534rhDaTdM.png">
-<meta property="og:image" content="https://i.loli.net/2019/08/18/RJgS8ruXZfs1EYK.png">
-<meta property="og:updated_time" content="2019-08-17T21:00:41.502Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/19/TJ17RtiusC2WakY.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/20/BNavmFgH8JdPE9f.png">
+<meta property="og:updated_time" content="2019-08-19T21:15:24.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法刷题-1">
-<meta name="twitter:description" content="算法开篇:算法作为每个互联网公司都必考的内容，是每个ITer求职路上的拦路虎,但也是每个人都必须要克服的一关，我一直梦想能进微软这样的一线互联网企业，想就有用了吗？算法过关了吗？所以这次下定决心一步一个脚印，把算法关卡攻克过去。 其实算法的本质是把实际问题抽象化为某种具体数据结构并且应用的过程，所以算法的学习可以细分成三个部分：  切碎知识点, 为了记忆的方便，我们把数据结构分为线性和非线性，线性">
-<meta name="twitter:image" content="https://i.loli.net/2019/08/18/OYtIL534rhDaTdM.png">
+<meta name="twitter:title" content="JVM类加载过程">
+<meta name="twitter:description" content="JVM类加载过程： 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的?  类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括加载，验证，准备，解析，初始化，使用和卸载总共7个阶段，而其中验证，">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/19/TJ17RtiusC2WakY.png">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -251,14 +251,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-算法刷题-1" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-JVM类加载过程" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      算法刷题-1
+      JVM类加载过程
     </h1>
   
 
@@ -275,8 +275,8 @@ var _hmt = _hmt || [];
 <!--显示阅读次数完毕-->
 
         
-        <a href="/2019/08/17/算法刷题-1/" class="archive-article-date">
-  	<time datetime="2019-08-17T19:19:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-17</time>
+        <a href="/2019/08/18/JVM类加载过程/" class="archive-article-date">
+  	<time datetime="2019-08-18T18:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
 </a>
         <!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
@@ -286,7 +286,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.6k字</span>
+        <span class="post-count">4.2k字</span>
       </span>
     </span>
 
@@ -295,7 +295,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">14分</span>
       </span>
     </span>
 </div>
@@ -308,34 +308,147 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="算法开篇"><a href="#算法开篇" class="headerlink" title="算法开篇:"></a>算法开篇:</h4><p>算法作为每个互联网公司都必考的内容，是每个ITer求职路上的拦路虎,但也是每个人都必须要克服的一关，我一直梦想能进微软这样的一线互联网企业，想就有用了吗？算法过关了吗？<br>所以这次下定决心一步一个脚印，把算法关卡攻克过去。</p>
-<p>其实算法的本质是把实际问题抽象化为某种具体数据结构并且应用的过程，所以算法的学习可以细分成三个部分：</p>
+        <h3 id="JVM类加载过程："><a href="#JVM类加载过程：" class="headerlink" title="JVM类加载过程："></a>JVM类加载过程：</h3><p> 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的? </p>
+<p>类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括<strong>加载，验证，准备，解析，初始化，使用和卸载</strong>总共7个阶段，而其中验证，准备和解析可以统称为<strong>连接</strong>。</p>
+<p>那什么时候JVM知道类需要被加载进去呢？可不是一股脑全部加载进去，既浪费内存也拖慢了机器执行速度。准确来说遇到以下五种情况，JVM会启动类加载进程。<br><a id="more"></a></p>
 <ol>
-<li><p>切碎知识点, 为了记忆的方便，我们把数据结构分为线性和非线性，线性包括数组和链表，而非线性包括树和图，然后在具体到某个结构的特点，可以应用到哪些问题上，这样记忆效果更好。</p>
+<li><p>在class文件中遇到new,getstatic,putstatic和invokestatic这四条字节码指令时，分为对应的场景是实例化一个对象，读取和设置一个类的静态字段和调用一个类的静态方法。这四种情况出现时，如果类还没有初始化就出触发类的加载过程。</p>
 </li>
-<li><p>刻意练习，人的成长过程总是痛苦的，没有人刻意躺在床上舒舒服服的成长，变强的第一步就是走出舒适区，感觉直面困难，刚开始肯定不舒服，肯定很痛苦，扛过去就长大了。对于自己不熟悉的知识点要可以去练习。</p>
+<li><p>使用反射包(java.lang.reflect)的方法对类进行反射调用时，如果类还没有初始化就出进行类加载。</p>
 </li>
-<li><p>反馈，这里既指练习通过后的喜悦，又指自我反思，应为算法不想考试，只为了得到结果，我们必修不断追求更高效率的解决方案，这才是你和其他竞争者的区别。</p>
+<li><p>由于java中存在继承和实现关系，当加载一个类时，如果它的父类还没有进行初始化，则先需要触发其父类的初始化。但是对于接口来说，并不要求父接口全部完成了初始化，只有在真正使用到父类接口时才需要进行初始化。</p>
+</li>
+<li><p>我们都知道java从main方法开始执行,所以当虚拟机启动时，需要用户制定一个主类,虚拟机先初始化这个主类。</p>
+</li>
+<li><p>当使用java动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后解析结果是REF_getStatic,REF_putStatic,REF_invokeStatic的方法句柄并且这个类没有被初始化过，就需要进行加载。这个条件我也不太懂……</p>
 </li>
 </ol>
-<a id="more"></a>
-<p><strong>练习</strong>是算法的永恒主题，但有些萌新可能不知道自己该怎么去找题目来做，这里推荐一个网站<strong><a href="https://leetcode.com/problemset/all/" target="_blank" rel="noopener">Leetcode</a></strong>和<strong><a href="https://leetcode-cn.com/problemset/all/" target="_blank" rel="noopener">力扣</a></strong>,这两个其实是一家网站，只不过后者是国内汉化版，注册登录以后就可以开始练习了，可以在线编辑测试也提供市面上多种流行编程语言，但要注意的是两个网站数据并不互通，所以无法在网站间同步记录。</p>
-<p>作为一个良心博主，肯定要那点干货出来，正所谓工欲善其事必先利其器，所以我给大家推荐一款刷题神器<strong><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a></strong>和<strong>Leetcode</strong>插件,者个插件可以指定等于的网站，并且可以直接提交代码，相当好用，推荐大家使用英文版。</p>
-<p><strong><em>Attention please!!!!!!!</em></strong>,注册完成后如果出现提交后出现404错误，请把自己的注册邮箱激活!!!另外国外英文网站链接不上，请自己想办法跨越那道墙!!!! 反正我在国外~~~</p>
-<p>好了第一篇算法文章，废话太多!上题！</p>
-<h5 id="Two-Sum"><a href="#Two-Sum" class="headerlink" title="Two-Sum:"></a><a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="noopener">Two-Sum</a>:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would have exactly one solution, and you may not use the same element twice.</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">Given nums = [2, 7, 11, 15], target = 9,</span><br><span class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</span><br><span class="line">return [0, 1].</span><br></pre></td></tr></table></figure>
-<h6 id="解法一"><a href="#解法一" class="headerlink" title="解法一:"></a>解法一:</h6><p>暴力搜索，这个相信大家都能想到，就是两个for循环嵌套，针对每一个数组元素 i，都轮训一遍数组中是否有target-i这个元素，这种想法简单，所以我不会给出代码，因为面试里面这么写的都已经凉凉了~~~时间复杂度为O(n^2).</p>
-<h6 id="解法二"><a href="#解法二" class="headerlink" title="解法二:"></a>解法二:</h6><p>这也是我写的解法，和标准答案都用到了相似的数据结构:HashMap,因为他的查询时间复杂度为O(1),而这个题目中根本就没有更新过程，所以使用他非常合适，不熟悉的朋友可以看我<strong><a href="https://zhengruyi.github.io/2019/08/07/HashMap-%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/">这篇文章</a></strong>。我先上图:<br><img src="https://i.loli.net/2019/08/18/OYtIL534rhDaTdM.png" alt="leetcode1-1.png"></p>
-<p>本意是数组元素作为键，下标作为值存入HashMap,借助containKey()这个方法可以快速确定另外一个target-i是否在数组中，但这个算法需要先将数组元素全部装入HashMap中，在进行查找，浪费时间。此外，这个算法也是错的，为什么呢?  HshMap的put()方法当元素不存在时，是存入操作，但是当已有元素时时更新操作.这个算法无法处理这种情况,数组为[3,3]target=6.此时理想结果为[0,1]而这个算法返回的是[1,1]就是由于HashMap在第二个1存入时更新了下标…..</p>
-<h6 id="标准解法："><a href="#标准解法：" class="headerlink" title="标准解法："></a>标准解法：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        HashMap&lt;Integer, Integer&gt; tracker = new HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">        int len = nums.length;</span><br><span class="line">        for(int i = 0; i &lt; len; i++)&#123;</span><br><span class="line">            if(tracker.containsKey(nums[i]))&#123;</span><br><span class="line">                int left = tracker.get(nums[i]);</span><br><span class="line">                return new int[]&#123;left, i&#125;;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                tracker.put(target - nums[i], i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new int[2];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>完美的解法,在数组一次遍历过程中，就可以解决这个问题，而且采用HashMap，时间复杂度为O(n),记住他的方法以<strong>target-nums[i]作为键，以indice为值</strong>。</p>
-<p>意犹未尽，再来一次题！</p>
-<h5 id="Add-Two-Numbers"><a href="#Add-Two-Numbers" class="headerlink" title="Add Two Numbers:"></a><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="noopener">Add Two Numbers</a>:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</span><br><span class="line"></span><br><span class="line">You may assume the two numbers do not contain any leading zero, except the number 0 itself.</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"></span><br><span class="line">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">Output: 7 -&gt; 0 -&gt; 8</span><br><span class="line">Explanation: 342 + 465 = 807.</span><br></pre></td></tr></table></figure>
-<h6 id="自己的解法"><a href="#自己的解法" class="headerlink" title="自己的解法:"></a>自己的解法:</h6><p>这个题目类似于多链表合并的过程，重点要考虑进位和链表长度不同这些因素，防止出现NullPointerExceotion,于是我就…..哎上图吧<br><img src="https://i.loli.net/2019/08/18/RJgS8ruXZfs1EYK.png" alt="leetcode2-1.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private int test(int sum)&#123;</span><br><span class="line">if(sum)&gt;=10</span><br><span class="line">return 1;</span><br><span class="line">else</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>好吧可以开始笑我了，其实自己也在写的过程中发现有很多重复代码，但我不确定怎么把<strong>多个边界条件合并</strong>，所以就成了这样了。自己面壁去吧…….</p>
-<h6 id="标准解法：-1"><a href="#标准解法：-1" class="headerlink" title="标准解法："></a>标准解法：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode p,dumy=new ListNode(0);</span><br><span class="line">        int carry=0;</span><br><span class="line">        p=dumy;</span><br><span class="line">        while(l1!=null||l2!=null||carry!=0)&#123;</span><br><span class="line">            if(l1!=null)&#123;</span><br><span class="line">                carry+=l1.val;</span><br><span class="line">                l1=l1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l2!=null)&#123;</span><br><span class="line">                carry+=l2.val;</span><br><span class="line">                l2=l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode s=new ListNode(carry%10);</span><br><span class="line">            carry/=10;</span><br><span class="line">            p.next=s;</span><br><span class="line">            p=s;</span><br><span class="line">        &#125;</span><br><span class="line">        return dumy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实接受很相似，优点在于更简洁，利用java里面的Integer整型特性，小于10的int类型/10为0，大于10的整型/10为1,完美解决了进位的问题,🐂🍺!</p>
-<p>明天继续和算法死磕!!!</p>
+<p>此外，补充一句，调用哪个类的静态字段才会导致哪个类被加载，也就是说加载父类的静态字段只会导致父类被加载，至于子类会不会被加载就取决于虚拟机的具体实现。</p>
+<h4 id="五阶段详解："><a href="#五阶段详解：" class="headerlink" title="五阶段详解："></a>五阶段详解：</h4><p><img src="https://i.loli.net/2019/08/19/TJ17RtiusC2WakY.png" alt="image.png"></p>
+<h5 id="加载："><a href="#加载：" class="headerlink" title="加载："></a>加载：</h5><p>在加载阶段，虚拟机需要完成的三件事：</p>
+<ol>
+<li><p>通过一个类的全限定名(包名+类名)来获取定义此类的二进制字节流</p>
+</li>
+<li><p>将这个字节流代表的<strong>静态存储结构转化为方法区的运行时数据结构</strong></p>
+</li>
+<li><p>在内存中生成一个代表类的java.lang.class对象，作为方法区中这个类的各种数据的访问入口</p>
+</li>
+</ol>
+<p>至于二进制流的来源，这点虚拟机并没有规定，所以你可以从jar,war这种包中读取，也可以从网络中获取(applet),也可以运行时计算生成，比如动态代理技术等。几乎所有的类的载入都要靠类加载器来完成，除了数组。数组由JVM自己创建，但是数组内的元素类型，如果是某个类，那么也是需要靠加载器来进行加载的。</p>
+<p>另外一般类的实例对象都存放在方法区中，但是Class对象很特殊，每个类唯一对应一个Class对象，它存放在方法区中。此外加载和链接的过程是交互进行的，可能记载阶段还没完成，连接阶段就已经开始了。</p>
+<h5 id="验证"><a href="#验证" class="headerlink" title="验证:"></a>验证:</h5><p>验证阶段是对class文件必要的检查,上面说过class文件的来源很杂，你甚至可以用十六进制形式来自己手动编写一个class文件，所以对文件进行必要的检查对JVM的安全运行就有举足轻重的意义。</p>
+<h6 id="1-文件格式验证"><a href="#1-文件格式验证" class="headerlink" title="1.文件格式验证:"></a>1.文件格式验证:</h6><ol>
+<li><p>文件是否以魔数0xCAFEBABE开头(魔数就是指定文件格式的标志吗，类似于文件后缀)</p>
+</li>
+<li><p>主次版号是否在当前虚拟机的处理范围内</p>
+</li>
+<li><p>常量池中是否有不被支持的常量类型<br>……</p>
+</li>
+</ol>
+<p>好吧，这个实在太抽象了，看不明白<strong>魔数和常量池</strong>的小伙伴可以去看看字节码文件那篇文章。</p>
+<p>这个阶段的验证是基于二进制字节流进行的，只有在这个阶段验证过后，字节流才会进入<strong>内存的方法区</strong>进行存储，所以后面的3个验证阶段<strong>全部基于方法区的存储结构进行，不会再直接操作字节流</strong>。</p>
+<h6 id="2-元数据验证"><a href="#2-元数据验证" class="headerlink" title="2.元数据验证:"></a>2.元数据验证:</h6><p>该阶段是对字节码描述的信息进行语义分析，用来保证描述的信息符合java语言规范的要求，可能的验证点包括:</p>
+<ol>
+<li><p>这个类是否有父类</p>
+</li>
+<li><p>这个类的父类是否继承了不允许被继承的类(final修饰的类)</p>
+</li>
+<li><p>如果这个类不是抽象类，是否实现了其父类或者接口之中要求实现的所有方法……</p>
+</li>
+</ol>
+<p>这个阶段的主要目的是对类的元数据进行校验，保证不存在不符合java语言规范的元数据信息。</p>
+<h6 id="3-字节码验证："><a href="#3-字节码验证：" class="headerlink" title="3.字节码验证："></a>3.字节码验证：</h6><p>这个阶段是整个过程最复杂的，主要目的是对数据流和控制流进行分析，确定程序语义是合法的符合逻辑的。这个阶段会对类的方法进行分析，保证被校验的类在运行时不会做出危害虚拟机的安全事件。例如：</p>
+<ol>
+<li><p>保证跳转指令不会跳转到方法体以外的字节码指令上</p>
+</li>
+<li><p>保证方法体中的类型转换是有效的，例如可以把子类对象赋给父类，但是反过来不行。</p>
+</li>
+<li><p>保证数据类型和指令代码都能配合工作，不会出现用long类型来加载int类型的数据到本地变量表中。</p>
+</li>
+</ol>
+<p>这里要说明的是如果没通过字节码验证，程序可定有问题，但是通过字节码验证，并不能代表程序没有问题。</p>
+<h6 id="4-符号引用验证："><a href="#4-符号引用验证：" class="headerlink" title="4.符号引用验证："></a>4.符号引用验证：</h6><p>最后一个阶段的验证发生在虚拟机将符号引用转化成直接引用的时候，通过这个转换动作发生在连接的第三个阶段-解析阶段发生，符号引用验证可以看作是对类自身以外（常量池中的各种符号引用)的信息进行匹配性校验，通常需要校验以下内容：</p>
+<ol>
+<li><p>符号引用中的通过字符串描述的全限定名能否找到对应的类</p>
+</li>
+<li><p>在指定的类中是否存在符合方法的字段描述符和简单名称所描述的方法和字段。</p>
+</li>
+<li><p>符号引用中的类，字段，方法的访问性是否可以被当前类访问。</p>
+</li>
+</ol>
+<p>符号引用的目的是为了确保动作可以正常执行，但是这个阶段并非必要，如果可以确定来源合法，可以考虑使用–Xverify：none参数来关闭验证存世来提高性能。</p>
+<h5 id="准备阶段："><a href="#准备阶段：" class="headerlink" title="准备阶段："></a>准备阶段：</h5><p>准备阶段是正式为类变量分配内存并且设置类变量初始值的阶段，这些变量所使用的内存都将在方法去中进行分配，这里要强调一下明首先这个时候进行内存分配的仅仅包括类变量(static)而不是实例变量，实例变量会在对象实例化时跟随者对象一起被分配在java堆中，这里的初始值一般指的是数据类型的零值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static int value =123;</span><br></pre></td></tr></table></figure></p>
+<p>代码中的value在准备阶段过后的值为0而不是123，因为这个时候尚未开始执行任何java代码。下面列出各种数据类型的零值:</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:left">零值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td>long</td>
+<td style="text-align:left">0L</td>
+</tr>
+<tr>
+<td>short</td>
+<td style="text-align:left">(short) 0</td>
+</tr>
+<tr>
+<td>char</td>
+<td style="text-align:left">‘\u00000’</td>
+</tr>
+<tr>
+<td>byte</td>
+<td style="text-align:left">(byte) 0</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td>float</td>
+<td style="text-align:left">0.0f</td>
+</tr>
+<tr>
+<td>double</td>
+<td style="text-align:left">0.0d</td>
+</tr>
+<tr>
+<td>reference</td>
+<td style="text-align:left">null</td>
+</tr>
+</tbody>
+</table>
+<p>上面都说了是一般情况，那例外的情况呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static final int value=123</span><br></pre></td></tr></table></figure></p>
+<p>这样的代码会在<strong>编译阶段为value生成Constant Value属性</strong>，所以在准备阶段虚拟机就会根据ConstantValue属性将value设置成123！</p>
+<h5 id="解析阶段："><a href="#解析阶段：" class="headerlink" title="解析阶段："></a>解析阶段：</h5><p>解析阶段是虚拟机将常量池中的符号引用替换成直接引用的过程，符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。被引用的目标不一定已经加载到内存中了，虽然各种虚拟机的内存布局可能不同，但是他们所能接受的符号引用必须是一致的，因为JVM规范在Class文件格式中已经明确定义了字面量的形式。</p>
+<p>直接引用可以是直接指向目标的文件，相对偏移量或者是能间接定位到目标的句柄，如果有了直接引用，那引用的目标必然已经在内存中存在了。</p>
+<p>由于对同一个符号引用进行多次解析是很常见的事，所以除了invokedynamic外，虚拟机实现可以对第一次解析结果进行缓存。解析动作通常主要针对<strong>类或接口，字段，类方法，接口方法，方法类型，方法句柄和调用点限定符</strong>7类符号引用进行。</p>
+<h5 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h5><p>初始化是类加载过程的最后一步，前面的阶段除了调用用户自定义的类加载器外，其余过程全部由虚拟机自己来主导完成，到了初始化阶段才会开始执行类中定义的java程序代码。</p>
+<p>在准备阶段，变量已经赋过一次系统要求的初始值，而在初始化阶段，则会根据代码制定的主观计划来初始化变量和其他资源，从另外一个阶段来说，初始化阶段就是执行<strong>类构造器&lt; Clinit&gt;</strong>方法的过程。</p>
+<p>&lt; Clinit&gt;方法是由编译器收集类中的所有类变量的赋值动作和静态语句块中的语句合并产生，编译器的收集顺序由语句在原文件中出现的顺序决定，静态语句块只能访问到定义在静态语句块之前的变量，定义在之后的变量，静态语句块可以赋值，但是不可以读取。</p>
+<p>&lt; clinit&gt;方法和类的构造函数不同，他不需要显式调用父类构造器，虚拟机会保证在子类的&lt; clinit&gt;方法执行之前，父类的&lt; clinit&gt;方法已经执行完毕，所以第一个被执行的方法肯定是java.lang.object。由于父类的&lt; clinit&gt;方法先执行，所以父类中的静态语句块要优先于子类的赋值操作。</p>
+<p>&lt; clinit&gt;方法不是必须的，如果一个类中没有静态语句块也没有对变量的赋值操作，那么编译器可以不为这个类生成&lt; clinit&gt;方法。接口中不能有静态语句块，但可以有赋值操作，所以接口一样有&lt; clinit&gt;方法，但是和类不同的是，它可以不用父接口的&lt; clinit&gt;方法，只在用到时才调用。此外在多线程情况下，虚拟机会保证&lt; clinit&gt;会被正确的加锁和同步，如果多个线程去竞争这个方法，那么只有一个可以执行，其他都会被阻塞。</p>
+<p>以上就是五个重要的加载阶段，接下来我们来讨论类加载器</p>
+<h4 id="类加载器："><a href="#类加载器：" class="headerlink" title="类加载器："></a>类加载器：</h4><p>虚拟机设计团队把类加载阶段中的<strong>通过一个类的全限定名来获取描述此类的二进制字节流这个动作放到虚拟机外部去实现，以便让那应用程序来决定如何获取所需要的类，实现这个动作的代码模块被称为类加载器</strong>。</p>
+<p>对于任意一个类，<strong>都需要由加载他的类加载器和这个类本身一同却在其在虚拟中的唯一性</strong>，每一个类加载器都拥有自己<strong>唯一的命名空间</strong>。也就是说比较两个类是否相等需要在同一个类加载器下才有意义，否则<strong>即使两个类来源于同一个class文件，被同一个虚拟机加载，只要在加载的类加载器不同，这两个类就不会相等</strong>。这里的相等主要指equals和isInstance方法的返回结果。</p>
+<h5 id="双亲委派模型："><a href="#双亲委派模型：" class="headerlink" title="双亲委派模型："></a>双亲委派模型：</h5><p>从JVM角度来说，只存在两种不同的加载器，一种是启动类加载器(bootstrap classloader),这个类加载器使用C++实现，是虚拟机自身的一部分；另外一部分就是其他的类加载器，这些加载器都是java语言实现，独立于虚拟机外部，并且全部继承自抽象类java.lang.ClassLoader.</p>
+<p>启动类加载器(bootstrap)负载将存放在JAVA_HOME\lib目录中的和-Xbootclasspath参数制定的路径中的，并且虚拟机可以识别的类库加载到内存中，启动类加载器无法被java城促引用。</p>
+<p>扩展类加载器(extensions ClassLoader)负责加载JAVA_HOME\lib\ext目录中的或者被java.ext.dirs系统变量所指定的所有类库，开发者可以直接使用扩展类加载器。</p>
+<p>应用程序类加载器(application ClassLoader)也称为系统类加载器，负责加载用户类路径上所制定的类库，开发者可以直接使用这个类加载器，一般情况下这就是程序的默认加载器。</p>
+<p>介绍完三种类加载器就，我们再来看看双亲委派模型的结构:<br><img src="https://i.loli.net/2019/08/20/BNavmFgH8JdPE9f.png" alt="image.png"></p>
+<p>如上图，双亲委派模型要求除了顶层的启动类加载器，其余的类加载器应当有自己的父类加载器，这种父子关系一般不用继承来实现，而是用组合的方式。</p>
+<p>双亲委派模型的工作过程：<strong>如果一个类加载器收到类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都会传递到顶层的启动类加载器中，只有父加载器反馈自己无法加载这个类时，子类加载器参会自己尝试去加载</strong>. 这样带有优先级的结构可以带来一定的安全保障，假设自己编写了Object类，这个类可以被编译，但永远不会被加载，因为启动类加载器加载的永远都是根目录中的java.lang.object这个类。</p>
+<h5 id="破坏双亲委派模型："><a href="#破坏双亲委派模型：" class="headerlink" title="破坏双亲委派模型："></a>破坏双亲委派模型：</h5><p>这个模型本身有一个缺点，它的特点是越是基础的类越要交给上层的加载器来加载，基础类就是常备用户调用的api,但如果基础类需要回调用户的代码怎么办?</p>
+<p>JNDI(java naming directories interface)是用来对资源进行集中管理和查找，它需要点用独立厂商实现并部署在ClassPath中的JNDI提供者的代码，但是启动类加载器根本不认识这些代码。为此java团队提供了ContextClassLoader()来进行设置，JNDI使用它来加载所需要的代码，也就是<strong>父类加载器要求子类加载器区加载代码</strong>，栗子包括JDBC这些。</p>
+<p>另外一个栗子就是OSGI技术，它可以实现模块化热部署，其中关键是他的自定义的类加载器机制的实现，每一个程序模块都有自己的类加载器，当替换一个bundle时，要把bundle和类加载器一起替换掉。所以父类加载器会用这个bundle的加载器来加载对应的代码模块，这也打破了双亲委派模型.</p>
+<p>终于写完了，好累！！！</p>
 
       
 
@@ -377,7 +490,7 @@ var _hmt = _hmt || [];
    
    <br>
    <strong>本文链接：</strong>
-   <a rel="license" href="https://zhengruyi.github.io/2019/08/17/算法刷题-1/">https://zhengruyi.github.io/2019/08/17/算法刷题-1/</a>
+   <a rel="license" href="https://zhengruyi.github.io/2019/08/18/JVM类加载过程/">https://zhengruyi.github.io/2019/08/18/JVM类加载过程/</a>
    <br>
    <strong>版权声明：</strong>
    本作品采用
@@ -433,7 +546,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
         		</li>
       		
 		</ul>
@@ -447,7 +560,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
@@ -502,7 +615,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/08/17/算法刷题-1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/08/18/JVM类加载过程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -516,18 +629,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/18/JVM类加载过程/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JVM类加载过程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/13/JVM垃圾收集算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JVM垃圾收集算法</div>
+    <a href="/2019/08/17/算法刷题-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">算法刷题-1</div>
       <i class="icon-circle-right"></i>
     </a>
   
