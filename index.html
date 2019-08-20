@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 8
+    总文章数 9
 </nav>
 
 
@@ -244,6 +244,186 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-ArrayList-LinkedList" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/20/ArrayList-LinkedList/">ArrayList&lt;--&gt;LinkedList</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/08/20/ArrayList-LinkedList/" class="archive-article-date">
+  	<time datetime="2019-08-20T19:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList:"></a>ArrayList:</h3><p>ArrayList 是一种常用的动态结构，从名字就可以知道这是一种基于数组的列表，但是它的底层原理到底是什么？使用它的人都知道，它和一般的数组不同，它是一种可以<strong>动态扩容</strong>的数据结构。</p>
+<p>它有三个构造函数，你可以传递一个int 参数来指定容量，也可传递一个Collection类来，ArrayList会根据它的迭代器返回的元素顺序来存储他们，当然你也可以什么都不给。</p>
+<p>ArrayList可以存储null,它的size(),isEmpty(),get(),set()都因为数组的底层结构可以在固定的时间内得到结果，和Vector的数据结构类似，但是Vector是线程安全的，很不幸ArrayList是线程不安全的，每个ArrayList都拥有容量就是数组的大小，随着元素数目的增多，ArrayList会进行自动扩展。由于非线程安全，所以需要自己进行同步处理，如果实在不行，可以考虑使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list=Collections.synchronizedList(new ArrayList());</span><br></pre></td></tr></table></figure></p>
+<p>ArrayList也拥有和HashMap相似的快速失败机制，即在迭代器生成后，数组发生了结构性变化，ArrayList会尽量抛出异常，中断遍历操作。ArrayList继承了abstractList，并且实现了List,RandomAccess,clonable和Serializable四个接口。内部只要由一个名为elementdata的数组来保存数据，它的默认初始容量为10.</p>
+<p>ArrayList的最大容量为Integer.MAX_VALUE-8,因为某些虚拟机会在数组前保留一些字符，当尝试去分配更大的内存时就会触发OOM异常。既然是动态数据结构，本身是数组结构，那么动态扩容就是重中之重. <strong>talk is cheap, show me the code !</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//扩容方法</span><br><span class="line">private int newCapacity(int minCapacity) &#123;</span><br><span class="line">        // overflow-conscious code</span><br><span class="line">        int oldCapacity = elementData.length;</span><br><span class="line">        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">        if (newCapacity - minCapacity &lt;= 0) &#123;</span><br><span class="line">            if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA)</span><br><span class="line">                return Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">            if (minCapacity &lt; 0) // overflow</span><br><span class="line">                throw new OutOfMemoryError();</span><br><span class="line">            return minCapacity;</span><br><span class="line">        &#125;</span><br><span class="line">        return (newCapacity - MAX_ARRAY_SIZE &lt;= 0)</span><br><span class="line">            ? newCapacity</span><br><span class="line">            : hugeCapacity(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">       rangeCheckForAdd(index);</span><br><span class="line">       modCount++;</span><br><span class="line">       final int s;</span><br><span class="line">       Object[] elementData;</span><br><span class="line">       if ((s = size) == (elementData = this.elementData).length)</span><br><span class="line">           elementData = grow();</span><br><span class="line">       System.arraycopy(elementData, index,</span><br><span class="line">                        elementData, index + 1,</span><br><span class="line">                        s - index);</span><br><span class="line">       elementData[index] = element;</span><br><span class="line">       size = s + 1;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/08/21/p2T4hQBGreYKoaF.png" alt="image.png"></p>
+<p>ArrayList在每次添加元素前都会检查容量，每次插入和删除都会调用<strong>System.arraycopy</strong>这个native方法，会消耗大量的时间。每次扩容，都会把容量增长1.5倍。 </p>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion:"></a>Conclusion:</h4><p>由于底层结构使用了数组，所以对于读取和更新操作可以通过的随机寻址操作快速完成，但是对于添加和删除操作，每次都需要调用System.arraycopy操作来进行数组移动，所以Arraylist更适合增删较少但是查询和更新操作很多的应用。</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList:"></a>LinkedList:</h3><p>LinkedList也允许元素为空(null),底层数据结构为双向链表,它也是非线程安全的，必要时可以使用SynchronizedList来包裹以保证线程安全性，这些特性类似于ArrayList.</p>
+<p>LinkedList继承了AbstractSequentialList，并且实现了List, Deque, clonable, serializab接口,双向链表内部的节点定义如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">private static class Node&lt;E&gt; &#123;</span><br><span class="line">        E item;</span><br><span class="line">        Node&lt;E&gt; next;</span><br><span class="line">        Node&lt;E&gt; prev;</span><br><span class="line">        Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">            this.item = element;</span><br><span class="line">            this.next = next;</span><br><span class="line">            this.prev = prev;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到典型的双向链表定义，两个指针分别用于指向前一个和后一个节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> public boolean add(E e) &#123;</span><br><span class="line">        linkLast(e);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line"></span><br><span class="line">   if (index == size)</span><br><span class="line">       linkLast(element);</span><br><span class="line">   else</span><br><span class="line">       linkBefore(element, node(index));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p> <img src="https://i.loli.net/2019/08/21/fgdcL1sFbWV4qEh.png" alt="image.png"></p>
+<p> 添加元素时可以指定在哪个位置添加，默认把元素添加到链表末尾。过程如上图：双向链表属于基础数据结构，注意指针连接的顺序。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;E&gt; node(int index) &#123;</span><br><span class="line">      // assert isElementIndex(index);</span><br><span class="line"></span><br><span class="line">      if (index &lt; (size &gt;&gt; 1)) &#123;</span><br><span class="line">          Node&lt;E&gt; x = first;</span><br><span class="line">          for (int i = 0; i &lt; index; i++)</span><br><span class="line">              x = x.next;</span><br><span class="line">          return x;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          Node&lt;E&gt; x = last;</span><br><span class="line">          for (int i = size - 1; i &gt; index; i--)</span><br><span class="line">              x = x.prev;</span><br><span class="line">          return x;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>查找操作时，会通过index判断在前半区还是后半区，再决定从头节点还是尾结点开始查找，这优化了查找效率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> public E remove(int index) &#123;</span><br><span class="line">        checkElementIndex(index);</span><br><span class="line">        return unlink(node(index));</span><br><span class="line">    &#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>删除操作会先确定index的正确性在去删除元素，当去删去某个元素时也是确定元素先存在后才回去删除这个元素.</p>
+<p><strong>特点</strong>:LinkedList实现了Deque接口，可以作为两个双向队列使用，但是没有RandomAccess接口，所以无法随机访问元素，实际上也不行，链表的元素不均匀分布导致无法直接进行地址查找。</p>
+<h4 id="Conclusion-1"><a href="#Conclusion-1" class="headerlink" title="Conclusion:"></a>Conclusion:</h4><p>LinkedList的增删只需要进行指针的移动，所以增删效率很高，但是对于查找来说，只能通过简单的半区查找来优化，查询速度耗时很慢……所以Linkedlist很适合增删频繁但是遍历查找很少的应用程序.</p>
+
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare" hidden="hidden"></div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataStructure </a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java源代码分析//" class="article-tag-list-link color5">Java源代码分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/20/ArrayList-LinkedList/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-JVM类加载过程" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -837,11 +1017,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阿里</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阿里</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
         		</li>
       		
 		</ul>
@@ -1323,7 +1503,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataStructure </a>
         		</li>
       		
 		</ul>
@@ -1658,7 +1838,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">DataStructure </a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1670,11 +1850,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">阿里</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
             
             <div class="clearfix"></div>
