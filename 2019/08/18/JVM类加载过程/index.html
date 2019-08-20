@@ -377,7 +377,7 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <p>符号引用的目的是为了确保动作可以正常执行，但是这个阶段并非必要，如果可以确定来源合法，可以考虑使用–Xverify：none参数来关闭验证存世来提高性能。</p>
-<h5 id="准备阶段："><a href="#准备阶段：" class="headerlink" title="准备阶段："></a>准备阶段：</h5><p>准备阶段是正式为类变量分配内存并且设置类变量初始值的阶段，这些变量所使用的内存都将在方法去中进行分配，这里要强调一下明首先这个时候进行内存分配的仅仅包括类变量(static)而不是实例变量，实例变量会在对象实例化时跟随者对象一起被分配在java堆中，这里的初始值一般指的是数据类型的零值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static int value =123;</span><br></pre></td></tr></table></figure></p>
+<h5 id="准备阶段："><a href="#准备阶段：" class="headerlink" title="准备阶段："></a>准备阶段：</h5><p>准备阶段是正式为类变量分配内存并且设置类变量初始值的阶段，这些变量所使用的内存都将在方法去中进行分配，这里要强调一下明首先这个时候进行内存分配的仅仅包括类变量(static)而不是实例变量，实例变量会在对象实例化时跟随者对象一起被分配在java堆中，这里的初始值一般指的是数据类型的零值。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">value</span> =<span class="number">123</span>;</span><br></pre></td></tr></table></figure></p>
 <p>代码中的value在准备阶段过后的值为0而不是123，因为这个时候尚未开始执行任何java代码。下面列出各种数据类型的零值:</p>
 <table>
 <thead>
@@ -425,7 +425,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<p>上面都说了是一般情况，那例外的情况呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private static final int value=123</span><br></pre></td></tr></table></figure></p>
+<p>上面都说了是一般情况，那例外的情况呢?<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> value=<span class="number">123</span></span><br></pre></td></tr></table></figure></p>
 <p>这样的代码会在<strong>编译阶段为value生成Constant Value属性</strong>，所以在准备阶段虚拟机就会根据ConstantValue属性将value设置成123！</p>
 <h5 id="解析阶段："><a href="#解析阶段：" class="headerlink" title="解析阶段："></a>解析阶段：</h5><p>解析阶段是虚拟机将常量池中的符号引用替换成直接引用的过程，符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。被引用的目标不一定已经加载到内存中了，虽然各种虚拟机的内存布局可能不同，但是他们所能接受的符号引用必须是一致的，因为JVM规范在Class文件格式中已经明确定义了字面量的形式。</p>
 <p>直接引用可以是直接指向目标的文件，相对偏移量或者是能间接定位到目标的句柄，如果有了直接引用，那引用的目标必然已经在内存中存在了。</p>
@@ -816,10 +816,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DataStructure </a>
               </li>
              
@@ -829,6 +825,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
               </li>
              
               <li class="article-tag-list-item">
