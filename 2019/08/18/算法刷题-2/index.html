@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
-  <title>Tag: JVM内存结构 | 巴黎 ITer~ |Ruyi.Blog</title>
+  <title>算法刷题-2 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:url" content="https://zhengruyi.github.io/tags/JVM内存结构/index.html">
+  <meta name="description" content="不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,就是读题加上思考可能出现的所有情况，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的边界条件的整合,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣">
+<meta name="keywords" content="Algorithm ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法刷题-2">
+<meta property="og:url" content="https://zhengruyi.github.io/2019/08/18/算法刷题-2/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
+<meta property="og:description" content="不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,就是读题加上思考可能出现的所有情况，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的边界条件的整合,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-22T20:28:05.729Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="巴黎 ITer~ |Ruyi.Blog">
+<meta name="twitter:title" content="算法刷题-2">
+<meta name="twitter:description" content="不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,就是读题加上思考可能出现的所有情况，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的边界条件的整合,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -243,169 +248,334 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-算法刷题-2" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      算法刷题-2
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+ <br>
+ <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+ <span class="icon-sort"></span>
+ <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+ </span>
+ </a>
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/08/18/算法刷题-2/" class="archive-article-date">
+  	<time datetime="2019-08-18T09:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.8k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,<strong>就是读题加上思考可能出现的所有情况</strong>，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的<strong>边界条件的整合</strong>,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣眼睛….</p>
+<p>废话太多上题….</p>
+<a id="more"></a>
+<h5 id="Longest-Substring-Without-Repeating-Characters"><a href="#Longest-Substring-Without-Repeating-Characters" class="headerlink" title="Longest Substring Without Repeating Characters:"></a><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="noopener">Longest Substring Without Repeating Characters</a>:</h5><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Given <span class="keyword">a</span> <span class="keyword">string</span>, find <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> <span class="keyword">the</span> longest substring <span class="keyword">without</span> repeating <span class="keyword">characters</span>.</span><br><span class="line"></span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"abcabcbb"</span></span><br><span class="line">Output: <span class="number">3</span> </span><br><span class="line">Explanation: The answer is <span class="string">"abc"</span>, <span class="keyword">with</span> <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> <span class="number">3.</span> </span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"bbbbb"</span></span><br><span class="line">Output: <span class="number">1</span></span><br><span class="line">Explanation: The answer is <span class="string">"b"</span>, <span class="keyword">with</span> <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> <span class="number">1.</span></span><br><span class="line">Example <span class="number">3</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"pwwkew"</span></span><br><span class="line">Output: <span class="number">3</span></span><br><span class="line">Explanation: The answer is <span class="string">"wke"</span>, <span class="keyword">with</span> <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> <span class="number">3.</span> </span><br><span class="line">             Note that <span class="keyword">the</span> answer must be <span class="keyword">a</span> substring, <span class="string">"pwke"</span> is <span class="keyword">a</span> subsequence <span class="keyword">and</span> <span class="keyword">not</span> <span class="keyword">a</span> substring.</span><br></pre></td></tr></table></figure>
+<p>题目是让你在一个字符串中找出最长的<strong>无重复字符的子串</strong>,并且返回它的长度。首先看到<strong>无重复</strong>这三个字就用该想到使用Set这种数据结构，我一开始也是这么想的，程序很快就写完了,就是把字符串逐个放入集合中用contains来判断是否有重复字符，如果有计算集合里面的字符长度，并且清空集合，这种解法通过大半测试用例，直到遇到”dvdf”….. 这个例子用我的思路得出结果是2,但是正确结果是3.后来不得已我采用hashMap来存储(char-position)，当遇到重复字符时就判断一下两者之间的位置，等于1就是我说的那种思路，清空重新就算，如果大于1就更新重复字符的位置，继续累加。虽然解决了问题但是代码冗长….</p>
+<h6 id="智障解法-我"><a href="#智障解法-我" class="headerlink" title="智障解法(我):"></a>智障解法(我):</h6><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> lengthOfLongestSubstring(<span class="keyword">String</span> s) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] <span class="keyword">array</span>=s.toCharArray();</span><br><span class="line">        HashMap&lt;Character,Integer&gt; <span class="built_in">map</span> =<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> length=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> temp=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> repeating=Integer.MAX_VALUE;</span><br><span class="line">        <span class="built_in">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="keyword">array</span>.length;i++)&#123;</span><br><span class="line">            <span class="built_in">if</span>(!<span class="built_in">map</span>.containsKey(<span class="keyword">array</span>[i]))&#123;</span><br><span class="line">                <span class="built_in">map</span>.<span class="built_in">put</span>(<span class="keyword">array</span>[i],i);</span><br><span class="line">                temp++;</span><br><span class="line">            &#125;<span class="built_in">else</span>&#123;</span><br><span class="line">                <span class="comment">//计算重复字母之间的间隔</span></span><br><span class="line">                <span class="keyword">int</span> re =i-<span class="built_in">map</span>.<span class="built_in">get</span>(<span class="keyword">array</span>[i]);</span><br><span class="line">                <span class="comment">//如果重复的两字母紧紧靠在一起，则清空表，从当前字母开始计数(temp=1)，此时</span></span><br><span class="line">                <span class="comment">//前面的字母序列对后续无影响</span></span><br><span class="line">                <span class="built_in">if</span>(re==<span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="built_in">map</span>.<span class="built_in">clear</span>();</span><br><span class="line">                    <span class="built_in">map</span>.<span class="built_in">put</span>(<span class="keyword">array</span>[i],i);</span><br><span class="line">                    temp=<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="comment">//如果两个重复字母没有连在一起，则需要考虑两者之间的字母数量</span></span><br><span class="line">                <span class="built_in">else</span>&#123;</span><br><span class="line">                    <span class="comment">//更新重复字母的位置</span></span><br><span class="line">                    <span class="built_in">map</span>.<span class="built_in">put</span>(<span class="keyword">array</span>[i],i);</span><br><span class="line">                    <span class="comment">//如果重复字母的间隔小于等于不重复字母数，则需要重新开始计数</span></span><br><span class="line">                    <span class="comment">//前一个字母并没有包含在新序列中，所以只需要简单加1，栗子:wobgrovw</span></span><br><span class="line">                    <span class="built_in">if</span>(re&lt;=temp)</span><br><span class="line">                       temp=re;</span><br><span class="line">                    <span class="built_in">else</span></span><br><span class="line">                       temp++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//解决序列中无重复字母的问题</span></span><br><span class="line">            <span class="built_in">if</span>(temp&gt;length)</span><br><span class="line">                length=temp;</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后来我看了票数最多的解答，感觉自己没有想错，他也用了Set这种数据结构，但是他是怎么解决我的问题呢？他使用了<strong>快慢指针</strong>这种解决办法，精彩！其实这种方法理解起来没有难度，就是需要多写代码来明白它常见的使用场景，比如链表倒数第k个元素和判断链表是否有环等.<br>我还是贴出标准答案吧。</p>
+<h6 id="大佬的解法"><a href="#大佬的解法" class="headerlink" title="大佬的解法:"></a>大佬的解法:</h6><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HashSet&lt;Character&gt; <span class="keyword">set</span>=new <span class="comment">HashSet&lt;&gt;()</span>;</span><br><span class="line">      int i=<span class="number">0</span>,j=<span class="number">0</span>,<span class="built-in">max</span>=<span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span>(j&lt;s.length())&#123;</span><br><span class="line">          <span class="comment">//快指针j用于遍历整个字符串，一直到遇到重复字符串无法添加时停下</span></span><br><span class="line">          <span class="keyword">if</span>(!<span class="keyword">set</span>.contains(s.charAt(j)))&#123;</span><br><span class="line">             <span class="keyword">set</span>.add(s.charAt(j++));</span><br><span class="line">             <span class="built-in">max</span>=Math.<span class="built-in">max</span>(<span class="built-in">max</span>, <span class="keyword">set</span>.size());</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//慢指针用于移除从开头到重复字母之间的全部字符，因为这些字母都被归类于前一个子串</span></span><br><span class="line">            <span class="keyword">set</span>.remove(s.charAt(i++));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return <span class="built-in">max</span>;</span><br></pre></td></tr></table></figure>
+<p>快指针逐个把元素放入集合中，每次放入操作都会更新最大不重复子串的长度,直到发现集合中已经存在现在将要放入的元素，这时慢指针开始按照字符串的顺序逐个移除,直到移除了集合中的重复元素，然后快指针继续逐个放入新元素，就这样一直循环，直到遍历完字符串。max这个变量值就是我们的所求的,这个方法时间复杂度是O(n).🐂🍺！</p>
+<h5 id="Median-of-Two-Sorted-Arrays"><a href="#Median-of-Two-Sorted-Arrays" class="headerlink" title="Median of Two Sorted Arrays:"></a><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/" target="_blank" rel="noopener">Median of Two Sorted Arrays</a>:</h5><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">There are <span class="literal">two</span> sorted arrays nums1 <span class="keyword">and</span> nums2 <span class="keyword">of</span> size m <span class="keyword">and</span> n respectively.</span><br><span class="line"></span><br><span class="line">Find <span class="keyword">the</span> <span class="built_in">median</span> <span class="keyword">of</span> <span class="keyword">the</span> <span class="literal">two</span> sorted arrays. The overall run <span class="built_in">time</span> complexity should be O(<span class="built_in">log</span> (m+n)).</span><br><span class="line"></span><br><span class="line">You may assume nums1 <span class="keyword">and</span> nums2 cannot be both <span class="literal">empty</span>.</span><br><span class="line"></span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">nums1 = [<span class="number">1</span>, <span class="number">3</span>]</span><br><span class="line">nums2 = [<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">The <span class="built_in">median</span> is <span class="number">2.0</span></span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">nums1 = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">nums2 = [<span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">The <span class="built_in">median</span> is (<span class="number">2</span> + <span class="number">3</span>)/<span class="number">2</span> = <span class="number">2.5</span></span><br></pre></td></tr></table></figure>
+<p>题目意思其实很简单，就是给你两个有序的数组，然后让你给出这两个有序数组中的中位数，这个题目其实最简单的解法就是先把这两个数组合并后在通过随机寻址就可以得到中位数了，但这个题目难点在于它要求你的算法复杂度为<strong>O(log(m+n))</strong>,而先合并再求解的方法的时间复杂度是<strong>O(m+n)</strong>.</p>
+<p>我后来看了一下网上的分组思路，自己尝试写了一下，始终无法通过，繁多的边界条件让我崩溃，看着频频出现的数组越界，更是欲哭无泪。后来我看了这位<strong><a href="https://blog.csdn.net/hk2291976/article/details/51107778" target="_blank" rel="noopener">大佬的博客</a></strong>，才慢慢明白这个题目为什么被归类为difficult,里面的用的技巧真的很多,<strong>虚拟数组，分治思想,分组条件，虚拟和实际数组之间的转换</strong>,说实话我现在还有点难理解，以后再来回顾吧，随着自己水平的提高，可能会有新的见解.</p>
+<h6 id="大佬的解法-1"><a href="#大佬的解法-1" class="headerlink" title="大佬的解法:"></a>大佬的解法:</h6><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">int</span> n<span class="symbol">=nums1</span>.length<span class="comment">;</span></span><br><span class="line">        int m<span class="symbol">=nums2</span>.length<span class="comment">;</span></span><br><span class="line">        //保证n是两个数组中较小的那个的长度</span><br><span class="line">        <span class="meta">if</span>(n&gt;m)</span><br><span class="line">          return findMedianSortedArrays(nums2, nums1)<span class="comment">;</span></span><br><span class="line">        // l1,l2表示分割完成后左边的数组的最大值，<span class="built_in">r1</span>,<span class="built_in">r2</span>则是右边数组最小的两个数.</span><br><span class="line">        // <span class="built_in">c1</span>,<span class="built_in">c2</span>是用二分法搜索时的下标。hi<span class="number">=2</span>n时数组虚拟插入之后的长度是<span class="number">2</span>*n+<span class="number">1</span>，所以下标最大是<span class="number">2</span>n</span><br><span class="line">        int l1<span class="number">=0</span>,l2<span class="number">=0</span>,<span class="built_in">r1</span><span class="number">=0</span>,<span class="built_in">r2</span><span class="number">=0</span>,<span class="built_in">c1</span>,<span class="built_in">c2</span>,lo<span class="number">=0</span>,hi<span class="number">=2</span>*n<span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">        <span class="meta">while</span>(lo&lt;<span class="symbol">=hi</span>)&#123;</span><br><span class="line">            <span class="built_in">c1</span>=(lo+hi)/<span class="number">2</span><span class="comment">;</span></span><br><span class="line">            <span class="built_in">c2</span><span class="symbol">=m</span>+n-<span class="built_in">c1</span><span class="comment">;</span></span><br><span class="line">            l1= (<span class="built_in">c1</span>=<span class="number">=0</span>) ? Integer.MIN_VALUE:nums1[(<span class="built_in">c1</span>-<span class="number">1</span>)/<span class="number">2</span>]<span class="comment">;</span></span><br><span class="line">            <span class="built_in">r1</span>= (<span class="built_in">c1</span>=<span class="number">=2</span>*n)? Integer.MAX_VALUE: nums1[<span class="built_in">c1</span>/<span class="number">2</span>]<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">            l2= (<span class="built_in">c2</span>=<span class="number">=0</span>) ? Integer.MIN_VALUE:nums2[(<span class="built_in">c2</span>-<span class="number">1</span>)/<span class="number">2</span>]<span class="comment">;</span></span><br><span class="line">            <span class="built_in">r2</span>= (<span class="built_in">c2</span>=<span class="number">=2</span>*m) ? Integer.MAX_VALUE:nums2[<span class="built_in">c2</span>/<span class="number">2</span>]<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">            <span class="meta">if</span>(l1&gt;<span class="built_in">r2</span>)</span><br><span class="line">                hi<span class="symbol">=c1</span>-<span class="number">1</span><span class="comment">;</span></span><br><span class="line">            <span class="meta">else</span> <span class="meta">if</span>(l2&gt;<span class="built_in">r1</span>)</span><br><span class="line">                lo<span class="symbol">=c1</span>+<span class="number">1</span><span class="comment">;</span></span><br><span class="line">            <span class="meta">else</span></span><br><span class="line">            <span class="keyword">break;</span></span><br><span class="line"><span class="keyword"> </span>       &#125;</span><br><span class="line"></span><br><span class="line">        return (Math.max(l1, l2)+Math.min(<span class="built_in">r1</span>,<span class="built_in">r2</span>))/<span class="number">2</span>.<span class="number">0</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>第一次自己写，为了保证使用最短的数组长度来进行二分查找，我使用if-else,大佬用<strong>迭代</strong>，我在考虑切分后空集怎么处理，怎么表示无限小，大佬用<strong>Interger.MIN_VALUE</strong>解决,我在奇偶长度之间写条件判断，大佬一招<strong>虚拟数组</strong>一统天下….膜拜大佬!!!!!!!</p>
+
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
             
-  
-  
-    
-    
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare">
+   <strong>本文作者：</strong>
+   
+     Zheng Ruyi
+   
+   <br>
+   <strong>本文链接：</strong>
+   <a rel="license" href="https://zhengruyi.github.io/2019/08/18/算法刷题-2/">https://zhengruyi.github.io/2019/08/18/算法刷题-2/</a>
+   <br>
+   <strong>版权声明：</strong>
+   本作品采用
+   <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+   进行许可。转载请注明出处！
+   
+     <br>
+     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+   
+ </div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/JVM类加载过程/" class="archive-article-date">
-  	<time datetime="2019-08-18T18:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/JVM类加载过程/">JVM类加载过程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/08/18/算法刷题-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/13/JVM垃圾收集算法/" class="archive-article-date">
-  	<time datetime="2019-08-13T21:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/08/18/JVM类加载过程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JVM类加载过程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/17/算法刷题-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">算法刷题-1</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/13/JVM垃圾收集算法/">JVM垃圾收集算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/JVM内存结构/" class="archive-article-date">
-  	<time datetime="2019-08-11T18:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/JVM内存结构/">JVM内存结构</a>
-    </h1>
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTk2MS8yMjQ3Mg==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+
+
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -432,9 +602,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
