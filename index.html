@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 10
+    总文章数 11
 </nav>
 
 
@@ -244,6 +244,184 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-算法刷题-3" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/25/算法刷题-3/">算法刷题-3</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/08/25/算法刷题-3/" class="archive-article-date">
+  	<time datetime="2019-08-25T19:04:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">8分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油!</p>
+<p>今天再来总结三个算法题,开始!</p>
+<h4 id="Longest-Palindromic-Substring"><a href="#Longest-Palindromic-Substring" class="headerlink" title="Longest Palindromic Substring:"></a><a href="https://leetcode.com/problems/longest-palindromic-substring/description/" target="_blank" rel="noopener">Longest Palindromic Substring</a>:</h4><p>题目描述如下:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Given <span class="keyword">a</span> <span class="keyword">string</span> s, find <span class="keyword">the</span> longest palindromic substring <span class="keyword">in</span> s. You may assume that <span class="keyword">the</span> maximum <span class="built_in">length</span> <span class="keyword">of</span> s is <span class="number">1000.</span></span><br><span class="line"></span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"babad"</span></span><br><span class="line">Output: <span class="string">"bab"</span></span><br><span class="line">Note: <span class="string">"aba"</span> is also <span class="keyword">a</span> valid answer.</span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"cbbd"</span></span><br><span class="line">Output: <span class="string">"bb"</span></span><br></pre></td></tr></table></figure>
+<p>大致意思就是给定一个字符串，要求返回其中长度最大的回文子串，回文子串就是正读和反读相同的这么一个字符串。这个题目标记为hard,因为对于我们这样的萌新来说，想到解法不难，但很难找到那个最优的解法。算法一直都是如此…..</p>
+<p>我发现我又捡到宝了，当时这个题目一直想不出来好的解法，好不容易知道要用的算法又看不懂解释无法理解，最终看到<strong><em><a href="https://leetcode.wang/" target="_blank" rel="noopener">这个博客</a></em></strong>，里面记录了前100多题目的解法，以后向这个大佬好好学习.</p>
+<h5 id="中心扩展法："><a href="#中心扩展法：" class="headerlink" title="中心扩展法："></a>中心扩展法：</h5><p>这种方法比较好理解，根据回文字符串的特性，以每个字符为中心，向两边进行遍历，直到到达边界，每次记录下以这个字符为中心的回文字符串的长度，当遍历完字符串之后我们就可以知道最大回文字符串的长度了。这个算法的实现在大佬的博客里有，实现也不难，但我直接就忽略了这个方法，因为复杂度实在太高，是O(N^2).</p>
+<h5 id="Manacher算法："><a href="#Manacher算法：" class="headerlink" title="Manacher算法："></a>Manacher算法：</h5><p>中心扩展法有一个问题，那就是<strong>重复遍历</strong>,举个例子”acab1ab2adf”这个字符串中以b1为中心遍历时已经知道它的长度是3,回文子串为”aba”,在中心为a时，最大回文子串是ababa,长度是5，那么在以b2为中心时就不需要在遍历a了，因为根据回文字符串的对称原理，它的回文子串的长度最少是3.我平时时间不多，所以不能做出很详细的解释，可以去上面的那个博客，它提供了更深刻的讲解.</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">String</span> longestPalindrome(<span class="keyword">String</span> s) &#123;</span><br><span class="line">        <span class="keyword">String</span> m=preProcess(s);</span><br><span class="line">        <span class="comment">//存储最大边界的回文字符串的中心位置</span></span><br><span class="line">        <span class="built_in">int</span> center=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//存储最大的回文字符串的回文半径</span></span><br><span class="line">        <span class="built_in">int</span> maxBoard=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//存储各个回文子串的回文半径</span></span><br><span class="line">        <span class="built_in">int</span>[] p =<span class="keyword">new</span> <span class="built_in">int</span>[m.length()];</span><br><span class="line">        <span class="comment">// i=0的位置是开始标志符^,i=m.length()-1的位置是结尾标志服$,这两个符号都不用计入算法.</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i=<span class="number">1</span>;i&lt;m.length()<span class="number">-1</span>;i++)&#123;</span><br><span class="line">            <span class="comment">//计算关于最大回文子串的中心位置的对称点</span></span><br><span class="line">            <span class="built_in">int</span> i_mirror=<span class="number">2</span>*center-i;</span><br><span class="line">            <span class="comment">//第一个下边界是对称的回文子串的长度，只有在i+p[i_mirror]&lt;maxBoard时才成立</span></span><br><span class="line">            <span class="comment">//但是是关于防止回文子串超出最大边界时，可能导致错误的情况</span></span><br><span class="line">            <span class="keyword">if</span>(maxBoard&gt;i)</span><br><span class="line">              p[i]=Math.<span class="built_in">min</span>(p[i_mirror],maxBoard-i);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">              p[i]=<span class="number">0</span>;</span><br><span class="line">            <span class="comment">//修正计算，当i+p[i_mirror]&lt;maxBoard时只运行一次</span></span><br><span class="line">            <span class="comment">//i+p[i_mirror]&gt;maxBoard,对p[i]的最大半径进行更新</span></span><br><span class="line">            <span class="keyword">while</span>(m.charAt(i+<span class="number">1</span>+p[i])==m.charAt(i<span class="number">-1</span>-p[i]))</span><br><span class="line">             p[i]++;</span><br><span class="line">            <span class="comment">//更新最大回文半径和对应的中心位置</span></span><br><span class="line">            <span class="keyword">if</span>(i+p[i]&gt;maxBoard)&#123;</span><br><span class="line">                center=i;</span><br><span class="line">                maxBoard=i+p[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//真实的字符串的起始点是 index-p[index]/2,它的长度就是p[index]</span></span><br><span class="line">        <span class="built_in">int</span> maxLength=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">1</span>;i&lt;p.length<span class="number">-1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p[i]&gt;maxLength)&#123;</span><br><span class="line">                maxLength=p[i];</span><br><span class="line">                index=i;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring((index-maxLength)/<span class="number">2</span>,(index-maxLength)/<span class="number">2</span>+maxLength);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//在字符串的每两个字符之间插入一个#,收尾分别插入^和$,这样可以解决字符串奇偶的问题，也可以</span></span><br><span class="line">    <span class="comment">//在遍历字符串时知道到达了字符串的边界</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> preProcess(<span class="keyword">String</span> s)&#123;</span><br><span class="line">        <span class="built_in">int</span> l=s.length();</span><br><span class="line">        <span class="keyword">if</span>(l==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"^$"</span>;</span><br><span class="line">        StringBuilder b=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        b.<span class="built_in">append</span>(<span class="string">"^#"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;l;i++)&#123;</span><br><span class="line">            b.<span class="built_in">append</span>(s.charAt(i)+<span class="string">"#"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        b.<span class="built_in">append</span>(<span class="string">"$"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> b.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结起来这个算法有两个精彩点,一个是虚拟数组的使用，和上次类似，就是把字符串的奇偶长度都统一转化成奇数长来简化操作. 其次是充分利用回文字符串的特性和对称原理，省去了很多重复验证的过程。时间复杂度是线性的，所以比中心扩展法会快很多。</p>
+<h4 id="ZigZag-Conversion"><a href="#ZigZag-Conversion" class="headerlink" title="ZigZag Conversion:"></a><a href="https://leetcode.com/problems/zigzag-conversion/description/" target="_blank" rel="noopener">ZigZag Conversion</a>:</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">The <span class="built_in">string</span> <span class="string">"PAYPALISHIRING"</span> <span class="keyword">is</span> written <span class="keyword">in</span> a zigzag pattern <span class="keyword">on</span> a <span class="keyword">given</span> <span class="built_in">number</span> <span class="keyword">of</span> rows like this: (you may want <span class="keyword">to</span> display this pattern <span class="keyword">in</span> a fixed font <span class="keyword">for</span> better legibility)</span><br><span class="line"></span><br><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br><span class="line">And <span class="keyword">then</span> <span class="built_in">read</span> line <span class="keyword">by</span> line: <span class="string">"PAHNAPLSIIGYIR"</span></span><br><span class="line"></span><br><span class="line">Write <span class="keyword">the</span> code <span class="keyword">that</span> will take a <span class="built_in">string</span> <span class="keyword">and</span> make this conversion <span class="keyword">given</span> a <span class="built_in">number</span> <span class="keyword">of</span> rows:</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> convert(<span class="built_in">string</span> s, int numRows);</span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">Input: s = <span class="string">"PAYPALISHIRING"</span>, numRows = <span class="number">3</span></span><br><span class="line">Output: <span class="string">"PAHNAPLSIIGYIR"</span></span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">Input: s = <span class="string">"PAYPALISHIRING"</span>, numRows = <span class="number">4</span></span><br><span class="line">Output: <span class="string">"PINALSIGYAHRPI"</span></span><br><span class="line">Explanation:</span><br><span class="line"></span><br><span class="line">P     I    N</span><br><span class="line">A   L S  I G</span><br><span class="line">Y A   H R</span><br><span class="line">P     I</span><br></pre></td></tr></table></figure>
+<p>这个题目是自己独立解出来的，其实本质上是找规律的一个操作，唯一需要注意的就是对于频繁需要修改的字符串结构，需要使用StringBuilder这种结构，作用类似于队列先进先出的结构。</p>
+<p>通过观察我们可以发现我们可以把字符串分成很多组，每组包括一列和一个斜行（最后一个字符除外，因为它属于下一个组),举🌰，对于s = “PAYPALISHIRING”，第一组是”PAYPAL”,第二组是”ISHIRI”,以此类推，每组元素是2*(numRows-1). 创建一个StringBuilder数组，以先升后降(这里指的是StringBuilder数组的下标)的顺序轮流将字符存入数组中的StringBuilder对象，最后把每个StringBuilder里面的内存组合拼在一起就行。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    public <span class="built_in">String</span> convert(<span class="built_in">String</span> s, <span class="built_in">int</span> numRows) &#123;</span><br><span class="line">        <span class="comment">//如果numRows=1,后续代码会抛出/0的异常</span></span><br><span class="line">        <span class="keyword">if</span>(numRows==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        <span class="comment">//根据给定的列数生成一个StingBuilder列表</span></span><br><span class="line">        StringBuilder[] bufferList=<span class="keyword">new</span> StringBuilder[numRows];</span><br><span class="line">        <span class="comment">//初始化列表内的StringBuilder对象</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;bufferList.length;i++)</span><br><span class="line">             bufferList[i]=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="comment">//按列切分，则每组元素有2*numRows-1,但是由于下标从0开始，所以是2*numRows-2</span></span><br><span class="line">            <span class="built_in">int</span> j=i%(<span class="number">2</span>*(numRows<span class="number">-1</span>));</span><br><span class="line">            <span class="built_in">int</span> k=<span class="number">-1</span>;</span><br><span class="line">            <span class="comment">//从0~numRows-1是顺序存储</span></span><br><span class="line">            <span class="keyword">if</span>(j&lt;=numRows<span class="number">-1</span>)</span><br><span class="line">            k=j;</span><br><span class="line">            <span class="comment">//numsRows-1~2*(numRows-1)是逆序存储</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            k=<span class="number">2</span>*(numRows<span class="number">-1</span>)-j;</span><br><span class="line"></span><br><span class="line">            bufferList[k].append(s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//遍历最终所有的StringBuilder生成结果</span></span><br><span class="line">        <span class="built_in">String</span> result=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;bufferList.length;i++)</span><br><span class="line">          result+=bufferList[i].toString();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这题还好是很简单的，主要就是找规律，其实也算用到了<strong>分治</strong>的思想吧。</p>
+<h4 id="Reverse-Integer"><a href="#Reverse-Integer" class="headerlink" title="Reverse Integer:"></a><a href="https://leetcode.com/problems/reverse-integer/description/" target="_blank" rel="noopener">Reverse Integer</a>:</h4><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Given a <span class="number">32</span>-<span class="built_in">bit</span> <span class="built_in">signed</span> <span class="built_in">integer</span>, reverse digits <span class="keyword">of</span> an <span class="built_in">integer</span>.</span><br><span class="line"></span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="number">123</span></span><br><span class="line">Output: <span class="number">321</span></span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">Input: -<span class="number">123</span></span><br><span class="line">Output: -<span class="number">321</span></span><br><span class="line">Example <span class="number">3</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="number">120</span></span><br><span class="line">Output: <span class="number">21</span></span><br><span class="line"><span class="literal">Note</span>:</span><br><span class="line"><span class="keyword">Assume</span> we are dealing <span class="keyword">with</span> an environment which could only store integers within the <span class="number">32</span>-<span class="built_in">bit</span> <span class="built_in">signed</span> <span class="built_in">integer</span> <span class="keyword">range</span>: [−<span class="number">231</span>,  <span class="number">231</span> − <span class="number">1</span>]. <span class="keyword">For</span> the purpose <span class="keyword">of</span> this problem, <span class="keyword">assume</span> that your <span class="keyword">function</span> returns <span class="number">0</span> <span class="keyword">when</span> the reversed <span class="built_in">integer</span> overflows.</span><br></pre></td></tr></table></figure>
+<p>简单来说就是把给定的int型有符号数就行翻转，但正负符号不变，由于指定了32位数，而且在翻转过程中可能会出现溢出的现象，所以需要考虑这个这个特例。</p>
+<p>这题其实只要知道x/=10和x%10的作用，前者是去掉个位上的值而后者是取得个位的数，就可以完美的解答这个题目，最简单无非把每个整数都拆出来，然后在倒序组装起来，所以差异无非就是代码够不够优美…..</p>
+<h5 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> r=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(x==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x!=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//r*10代表每次将r向左移一位，而x%10则代表每次得到个位的值</span></span><br><span class="line">            r=r*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">            x/=<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(r&gt;Integer.MAX_VALUE||r&lt;Integer.MIN_VALUE)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">         <span class="keyword">return</span> (<span class="keyword">int</span>)r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是我见过的最简单的解法，这里贴出来,c’est tout ！</p>
+<p>总的来说，Manache还是一个很好用的算法，需要自己重点记忆!!!</p>
+
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare" hidden="hidden"></div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/25/算法刷题-3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-ArrayList-LinkedList" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -1705,167 +1883,10 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-index" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/01/index/">个人介绍</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/01/index/" class="archive-article-date">
-  	<time datetime="2019-08-01T13:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍:"></a>个人介绍:</h3><p>欢迎大家来到我的博客，我是一名出身在农村的👨‍💻‍，目前在法国读工程师学位，相当于国内的硕士学位。在国外这两年渐渐迷上了编程，因为喜欢运用自己的所学，更喜欢创造的感觉。这两年其实一直都在看编程方面的博客和书籍，其实就如过眼云烟一样随风飘散，基本没有留下什么。所以我才想搭建一个博客来记录下自己的理解，一是方便自己将来的复习，二来也是为了能够检验自己掌握的水平。</p>
-<p></p>
-        
-          <a class="article-more-a" href="/2019/08/01/index/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">主页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/01/index/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1989,19 +2010,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">阿里</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
             
             <div class="clearfix"></div>
