@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
   <title>算法刷题-3 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始! Longest Palindromic Substring:题目描述如下: 1234567891011Given a string s,">
+  <meta name="description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始!">
 <meta name="keywords" content="Algorithm ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法刷题-3">
 <meta property="og:url" content="https://zhengruyi.github.io/2019/08/25/算法刷题-3/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始! Longest Palindromic Substring:题目描述如下: 1234567891011Given a string s,">
+<meta property="og:description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始!">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-25T20:17:58.415Z">
+<meta property="og:updated_time" content="2019-08-25T20:19:25.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法刷题-3">
-<meta name="twitter:description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始! Longest Palindromic Substring:题目描述如下: 1234567891011Given a string s,">
+<meta name="twitter:description" content="已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油! 今天再来总结三个算法题,开始!">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -306,7 +306,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油!</p>
-<p>今天再来总结三个算法题,开始!</p>
+<p>今天再来总结三个算法题,开始!<br><a id="more"></a></p>
 <h4 id="Longest-Palindromic-Substring"><a href="#Longest-Palindromic-Substring" class="headerlink" title="Longest Palindromic Substring:"></a><a href="https://leetcode.com/problems/longest-palindromic-substring/description/" target="_blank" rel="noopener">Longest Palindromic Substring</a>:</h4><p>题目描述如下:</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Given <span class="keyword">a</span> <span class="keyword">string</span> s, find <span class="keyword">the</span> longest palindromic substring <span class="keyword">in</span> s. You may assume that <span class="keyword">the</span> maximum <span class="built_in">length</span> <span class="keyword">of</span> s is <span class="number">1000.</span></span><br><span class="line"></span><br><span class="line">Example <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"babad"</span></span><br><span class="line">Output: <span class="string">"bab"</span></span><br><span class="line">Note: <span class="string">"aba"</span> is also <span class="keyword">a</span> valid answer.</span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">Input: <span class="string">"cbbd"</span></span><br><span class="line">Output: <span class="string">"bb"</span></span><br></pre></td></tr></table></figure>
 <p>大致意思就是给定一个字符串，要求返回其中长度最大的回文子串，回文子串就是正读和反读相同的这么一个字符串。这个题目标记为hard,因为对于我们这样的萌新来说，想到解法不难，但很难找到那个最优的解法。算法一直都是如此…..</p>
@@ -684,15 +684,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JVM内存结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DataStructure </a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JVM内存结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,10 +705,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
               </li>
              
               <li class="article-tag-list-item">
