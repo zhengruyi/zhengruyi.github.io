@@ -9,7 +9,7 @@
   <title>JVM垃圾收集算法 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JVM垃圾收集算法：Java和C++作为后端常用的两门编程语言，他们之间也有一些不同之处，比如C++的内存分配和回收都需要手动进行而在Java中，这个工作则是交给了JVM自己来完成，所以了解它的具体垃圾收集算法就很有必要了，下面我们就来聊聊用的各种垃圾收集算法和垃圾收集器。从上面的大纲我们可以看到，垃圾收集算法的演变过程大致可以分为三类，标记清除，标记复制和标记整理算法，最后渐渐演变成我们今天常见">
-<meta name="keywords" content="JVM内存结构">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM垃圾收集算法">
 <meta property="og:url" content="https://zhengruyi.github.io/2019/08/13/JVM垃圾收集算法/index.html">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/vUNoV9JTISXzYOP.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/qv1lj3HGBXd4ius.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/ULBME6IGXbTeihP.png">
-<meta property="og:updated_time" content="2019-08-15T14:34:33.518Z">
+<meta property="og:updated_time" content="2019-09-01T19:48:11.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM垃圾收集算法">
 <meta name="twitter:description" content="JVM垃圾收集算法：Java和C++作为后端常用的两门编程语言，他们之间也有一些不同之处，比如C++的内存分配和回收都需要手动进行而在Java中，这个工作则是交给了JVM自己来完成，所以了解它的具体垃圾收集算法就很有必要了，下面我们就来聊聊用的各种垃圾收集算法和垃圾收集器。从上面的大纲我们可以看到，垃圾收集算法的演变过程大致可以分为三类，标记清除，标记复制和标记整理算法，最后渐渐演变成我们今天常见">
@@ -84,7 +84,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 13
+    总文章数 14
 </nav>
 
 
@@ -485,7 +485,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
@@ -759,7 +759,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JVM内存结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,15 +771,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">阿里</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">

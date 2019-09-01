@@ -9,7 +9,7 @@
   <title>JVM类加载过程 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JVM类加载过程： 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的?  类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括加载，验证，准备，解析，初始化，使用和卸载总共7个阶段，而其中验证，">
-<meta name="keywords" content="JVM内存结构">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM类加载过程">
 <meta property="og:url" content="https://zhengruyi.github.io/2019/08/18/JVM类加载过程/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/19/TJ17RtiusC2WakY.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/20/BNavmFgH8JdPE9f.png">
-<meta property="og:updated_time" content="2019-08-19T21:15:24.421Z">
+<meta property="og:updated_time" content="2019-09-01T19:47:59.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM类加载过程">
 <meta name="twitter:description" content="JVM类加载过程： 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的?  类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括加载，验证，准备，解析，初始化，使用和卸载总共7个阶段，而其中验证，">
@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 13
+    总文章数 14
 </nav>
 
 
@@ -546,7 +546,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JVM内存结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
@@ -820,7 +820,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JVM内存结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,15 +832,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">阿里</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
