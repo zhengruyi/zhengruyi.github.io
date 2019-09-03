@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
-  <title>巴黎 ITer~ |Ruyi.Blog</title>
+  <title>JVM方法调用 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:url" content="https://zhengruyi.github.io/index.html">
+  <meta name="description" content="前言：我们都知道java这种面向对象的编程的语言有的三个特征，继承，多态，封装。但是这种重要的特性是怎么实现的呢？可以从JVM的方法调用过程找到我们的答案。">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM方法调用">
+<meta property="og:url" content="https://zhengruyi.github.io/2019/09/02/JVM方法调用/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
+<meta property="og:description" content="前言：我们都知道java这种面向对象的编程的语言有的三个特征，继承，多态，封装。但是这种重要的特性是怎么实现的呢？可以从JVM的方法调用过程找到我们的答案。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/09/03/bOaTxgvL4cAwl7D.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/04/avlxnIdHtuNbT8p.png">
+<meta property="og:updated_time" content="2019-09-03T21:16:29.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="巴黎 ITer~ |Ruyi.Blog">
+<meta name="twitter:title" content="JVM方法调用">
+<meta name="twitter:description" content="前言：我们都知道java这种面向对象的编程的语言有的三个特征，继承，多态，封装。但是这种重要的特性是怎么实现的呢？可以从JVM的方法调用过程找到我们的答案。">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/03/bOaTxgvL4cAwl7D.png">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -243,20 +251,26 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-JVM方法调用" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+            <article id="post-JVM方法调用" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/02/JVM方法调用/">JVM方法调用</a>
+    <h1 class="article-title" itemprop="name">
+      JVM方法调用
     </h1>
   
 
         <!--显示阅读次数-->
+
+ <br>
+ <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+ <span class="icon-sort"></span>
+ <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+ </span>
+ </a>
 
 <!--显示阅读次数完毕-->
 
@@ -294,1305 +308,51 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>我们都知道java这种面向对象的编程的语言有的三个特征，<strong>继承，多态，封装</strong>。但是这种重要的特性是怎么实现的呢？可以从JVM的方法调用过程找到我们的答案。<br><img src="https://i.loli.net/2019/09/03/bOaTxgvL4cAwl7D.png" alt="image.png"><br></p>
-        
-          <a class="article-more-a" href="/2019/09/02/JVM方法调用/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/02/JVM方法调用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JVM字节码执行引擎" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/01/JVM字节码执行引擎/">JVM栈帧结构</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/09/01/JVM字节码执行引擎/" class="archive-article-date">
-  	<time datetime="2019-09-01T19:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.4k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>执行引擎是JVM虚拟机最核心的组成部件之一，虚拟机是一个相对与物理机的概念，这两种机器都具有执行代码的能力，区别在于物理机的执行引擎是直接建立在处理器和硬件，指令集和操作系统层面上的，而虚拟机的执行引擎则是自己实现的，因此可以自行制定指令集和执行引擎的结构体系，并且能够执行那些不被硬件直接支持的指令。 <strong>执行引擎在执行java代码时可能会有解释执行(通过解释器执行)和编译执行（通过即时编译器产生本地代码执行）两种选择，也可能两者兼备，甚至可能包含几个不同级别的编译器执行引擎</strong>。下面总结一下虚拟机方法调用和字节码执行的流程。<br></p>
-        
-          <a class="article-more-a" href="/2019/09/01/JVM字节码执行引擎/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/01/JVM字节码执行引擎/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Rdeis基本数据类型-二" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/Rdeis基本数据类型-二/">Rdeis基本数据类型-下</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/27/Rdeis基本数据类型-二/" class="archive-article-date">
-  	<time datetime="2019-08-27T19:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.4k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">15分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://i.loli.net/2019/08/27/XH2oBKPWihv39ZI.png" alt="image.png"><br>上一部分介绍了Redis的基本数据类型之字符串，链表和字典。下面接着介绍剩下的数据结构.<br></p>
-        
-          <a class="article-more-a" href="/2019/08/27/Rdeis基本数据类型-二/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/27/Rdeis基本数据类型-二/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Redis基本数据类型" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/26/Redis基本数据类型/">Redis基本数据类型-上</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/26/Redis基本数据类型/" class="archive-article-date">
-  	<time datetime="2019-08-26T19:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.3k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p><img src="https://i.loli.net/2019/08/27/XH2oBKPWihv39ZI.png" alt="image.png"><br>经常折腾算法和JVM,有点乏味，开始一个新的部分吧：<strong>数据库</strong>，本质上就是一个经过设计的地方，很多人学软件的基本都接触过，但是作为一个软件工程师，水平肯定不能停留在会写SQL,会crud而已，所以我就借着博客来总结总结自己对于数据库的认识和理解。主要讲Redis和Mysql。后续可能回去讲Hbase和MongoDB.NoSQl是未来的趋势但是<strong>Mysql</strong>的地位还是不可撼动的,但是数据库的读写性能有限，为了满足高并发的要求就不得不使用<strong>Redis</strong>来做缓存。所以先拿这两个开刀…..<br></p>
-        
-          <a class="article-more-a" href="/2019/08/26/Redis基本数据类型/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/26/Redis基本数据类型/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-算法刷题-3" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/算法刷题-3/">算法刷题-3</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/25/算法刷题-3/" class="archive-article-date">
-  	<time datetime="2019-08-25T19:04:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>已经两天没有写了，今天赶紧出来水一篇，后续准备开数据库部分，不是自己懒散，实在是在我这个算法的初级阶段，碰到一个难点要思考很久，有时写了又擦，擦了又写，一下午就写了两三个题目，慢慢来吧，等我度过了初级阶段后面应该会提速的，加油!</p>
-<p>今天再来总结三个算法题,开始!<br></p>
-        
-          <a class="article-more-a" href="/2019/08/25/算法刷题-3/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/算法刷题-3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ArrayList-LinkedList" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/20/ArrayList-LinkedList/">ArrayList&lt;--&gt;LinkedList</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/20/ArrayList-LinkedList/" class="archive-article-date">
-  	<time datetime="2019-08-20T19:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList:"></a>ArrayList:</h3><p>ArrayList 是一种常用的动态结构，从名字就可以知道这是一种基于数组的列表，但是它的底层原理到底是什么？使用它的人都知道，它和一般的数组不同，它是一种可以<strong>动态扩容</strong>的数据结构。</p>
-<p>它有三个构造函数，你可以传递一个int 参数来指定容量，也可传递一个Collection类来，ArrayList会根据它的迭代器返回的元素顺序来存储他们，当然你也可以什么都不给。</p>
-<p>ArrayList可以存储null,它的size(),isEmpty(),get(),set()都因为数组的底层结构可以在固定的时间内得到结果，和Vector的数据结构类似，但是Vector是线程安全的，很不幸ArrayList是线程不安全的，每个ArrayList都拥有容量就是数组的大小，随着元素数目的增多，ArrayList会进行自动扩展。由于非线程安全，所以需要自己进行同步处理，如果实在不行，可以考虑使用:<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">List</span> <span class="built_in">list</span>=Collections.synchronizedList(<span class="literal">new</span> ArrayList());</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2019/08/20/ArrayList-LinkedList/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataStructure </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java源代码分析//" class="article-tag-list-link color5">Java源代码分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/20/ArrayList-LinkedList/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JVM类加载过程" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/18/JVM类加载过程/">JVM类加载过程</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/18/JVM类加载过程/" class="archive-article-date">
-  	<time datetime="2019-08-18T18:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">14分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="JVM类加载过程："><a href="#JVM类加载过程：" class="headerlink" title="JVM类加载过程："></a>JVM类加载过程：</h3><p> 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的? </p>
-<p>类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括<strong>加载，验证，准备，解析，初始化，使用和卸载</strong>总共7个阶段，而其中验证，准备和解析可以统称为<strong>连接</strong>。</p>
-<p>那什么时候JVM知道类需要被加载进去呢？可不是一股脑全部加载进去，既浪费内存也拖慢了机器执行速度。准确来说遇到以下五种情况，JVM会启动类加载进程。<br></p>
-        
-          <a class="article-more-a" href="/2019/08/18/JVM类加载过程/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/18/JVM类加载过程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-算法刷题-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/18/算法刷题-2/">算法刷题-2</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/18/算法刷题-2/" class="archive-article-date">
-  	<time datetime="2019-08-18T09:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,<strong>就是读题加上思考可能出现的所有情况</strong>，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的<strong>边界条件的整合</strong>,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣眼睛….</p>
-<p>废话太多上题….</p>
-        
-          <a class="article-more-a" href="/2019/08/18/算法刷题-2/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/18/算法刷题-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-算法刷题-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/17/算法刷题-1/">算法刷题-1</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/17/算法刷题-1/" class="archive-article-date">
-  	<time datetime="2019-08-17T19:19:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-17</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.6k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="算法开篇"><a href="#算法开篇" class="headerlink" title="算法开篇:"></a>算法开篇:</h4><p>算法作为每个互联网公司都必考的内容，是每个ITer求职路上的拦路虎,但也是每个人都必须要克服的一关，我一直梦想能进微软这样的一线互联网企业，想就有用了吗？算法过关了吗？<br>所以这次下定决心一步一个脚印，把算法关卡攻克过去。</p>
-<p>其实算法的本质是把实际问题抽象化为某种具体数据结构并且应用的过程，所以算法的学习可以细分成三个部分：</p>
+        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>我们都知道java这种面向对象的编程的语言有的三个特征，<strong>继承，多态，封装</strong>。但是这种重要的特性是怎么实现的呢？可以从JVM的方法调用过程找到我们的答案。<br><img src="https://i.loli.net/2019/09/03/bOaTxgvL4cAwl7D.png" alt="image.png"><br><a id="more"></a></p>
+<h4 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用:"></a>方法调用:</h4><p>方法调用不同于方法执行，方法调用阶段的唯一任务就是确定被调用方法的版本，即调用哪一个方法，在class文件编译的过程中，并不包含传统编译的链接阶段，一切方法在class文件里面存储的都是符号引用，而不是方法的直接引用，也就是方法在实际运行时的内存布局中的入口地址。这个特性给java带来了强大的扩展能力，但也带来了很大的麻烦，使得方法在类加载阶段甚至到运行期间才能确定方法的直接引用。</p>
+<p>在类加载的解析阶段，会有其中一部分符号引用直接转化成直接转化成直接引用，但这个action有一个前提<strong>就是在方法运行前就可以确定方法的调用版本，并且这个方法的调用版本在运行期是不可以改变的</strong>，换句话说就是在程序目标代码写好，编译器进行编译时就确定下来，这类方法的调用成为解析。</p>
+<p>在java中，大致有两种方法满足”编译器可知，运行期不变这种特性”，静态方法和私有方法，黔中与类型直接关联，后者在外部不可被访问，这两种方法各自的特点决定了他们不可能通过继承或者别的方式重写其他版本，因此他们都适合在类加载阶段被解析。</p>
+<p>在JVM繁多的字节码指令中，只有五条字节码指令用来进行方法调用，所以我们将他们一一列出来。它们是:</p>
 <ol>
-<li><p>切碎知识点, 为了记忆的方便，我们把数据结构分为线性和非线性，线性包括数组和链表，而非线性包括树和图，然后在具体到某个结构的特点，可以应用到哪些问题上，这样记忆效果更好。</p>
+<li><p>invokestatic: 调用静态方法。</p>
 </li>
-<li><p>刻意练习，人的成长过程总是痛苦的，没有人刻意躺在床上舒舒服服的成长，变强的第一步就是走出舒适区，感觉直面困难，刚开始肯定不舒服，肯定很痛苦，扛过去就长大了。对于自己不熟悉的知识点要可以去练习。</p>
+<li><p>invokespecial:调用实例构造器&lt; init&gt;方法，私有方法和父类方法</p>
 </li>
-<li><p>反馈，这里既指练习通过后的喜悦，又指自我反思，应为算法不想考试，只为了得到结果，我们必修不断追求更高效率的解决方案，这才是你和其他竞争者的区别。</p>
+<li><p>invokevirtual:调用所有的虚方法</p>
+</li>
+<li><p>invokeinterface方法：调用接口方法，会在运行时确定一个实现此接口的对象</p>
+</li>
+<li><p>invokedynamic: 先在运行时动态解析出调用点限定符所引用的方法，然后再执行该方法</p>
 </li>
 </ol>
-        
-          <a class="article-more-a" href="/2019/08/17/算法刷题-1/#more">more >></a>
-        
+<p><strong>这里需要特别指出的是前四条指令的分派逻辑都固化在java虚拟机内部，只有invokedynamic指令的分派逻辑是由用户所设定的引导方法决定的，只要能被invokestatic和invokespecial指令调用的方法，都可在解析阶段中唯一确定的调用版本，符合这个条件的静态方法，私有方法，实例构造器，父方法四类，它们在类加载阶段时就会把符号引用解析为该方法的直接引用，这些方法称为非虚方法，与之相反的那部分称为虚方法。</strong></p>
+<p>但是在所有由invokevirtual调用的方法中有一个例外就是被final修饰的方法，他虽然是被invokevirtual指令调用，但是由于它无法被覆盖，没有其他版本，所以也无须<br>对方法接受者进行多态选择，因为接受者肯定是唯一的。所以final方法是一种非虚方法。</p>
+<p>不同于解析调用一定是一个静态过程，在编译期间就完全确定，<strong>分派调用则可能是静态也可能是动态，根据分派的宗量数目则可以分为单分派和多分派</strong>，两两组合就可以组合出四种情况。</p>
+<h4 id="分派："><a href="#分派：" class="headerlink" title="分派："></a>分派：</h4><p>分派调用过程就是Java面向对象的三个基本特征的多态的底层实现，现在就来看看重载和重写在java虚拟机中是怎么实现的。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Human man</span> =new Man();</span><br></pre></td></tr></table></figure>
+<p>上面代码中的Human称为变量的静态类型，或者叫外观类型，后面的Man则称为变量的实际类型，静态类型和实际类型在程序中都可以放生一些变化，<strong>区别在于静态类型变化仅仅在使用时发生，变量本身的静态类型不会被改变，并且最终的静态类型是在编译期可知的，而实际类型变化的结果在运行期才可确定，编译器在编译时并不知道对象的实际类型是什么</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//实际类型变化</span><br><span class="line">Human <span class="keyword">man</span> =new <span class="keyword">Man</span>();</span><br><span class="line"><span class="keyword">man</span> = new <span class="keyword">Woman</span>();</span><br><span class="line">//静态类型变化</span><br><span class="line">sr.sayHello((<span class="keyword">Man</span>)<span class="keyword">man</span>);</span><br><span class="line">sr.sayHello((<span class="keyword">Woman</span>)<span class="keyword">man</span>);</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，方法的接收者已经确定对象是sr的前提下，使用哪个重载版本就完全取决于参数的数量和数据类型，上面的代码可以定义了两个静态类型相同但实际类型不同的变量，但是虚拟机在重载时是通过参数的<strong>静态类型而不是实际类型无欧威判定依据的，并且静态类型是编译器可知的，因此在编译阶段，javac编译器就会根据参数的静态类型来决定使用哪个重载版本，所以选择了sayHello(Human)来作为调用目标</strong></p>
+<p>所有依赖静态类型定位方法执行版本的分派动作称为静态分派，静态分派的典型应用就是方法重载，静态分派发生在编译阶段，因此静态分派的动作实际上不是由虚拟机来执行的。如果找不到准确匹配，就会进行模糊匹配,按照char-&gt;int-&gt;long-&gt;float-&gt;double顺序进行转型匹配。还是找不到就会发生自动装箱int-&gt;Integer,char-&gt;Character,再找不到就会装箱实现的接口类型或者父类。而可变长参数的承载优先级是最低的。</p>
+<h5 id="动态分派："><a href="#动态分派：" class="headerlink" title="动态分派："></a>动态分派：</h5><p>动态分派过程体现了多态性的另外一个重要体现，重写。<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Human <span class="keyword">man</span>= new <span class="keyword">Man</span>();</span><br><span class="line">Human <span class="keyword">woman</span>= new <span class="keyword">Woman</span>();</span><br><span class="line"><span class="keyword">man</span>.sayHello();</span><br><span class="line"><span class="keyword">woman</span>.sayHello();</span><br><span class="line"><span class="keyword">man</span>=new Human();</span><br><span class="line"><span class="keyword">man</span>.sayHello();</span><br><span class="line">结果:</span><br><span class="line"><span class="keyword">man</span> sayHello;</span><br><span class="line"><span class="keyword">woman</span> sayHello;</span><br><span class="line">Human sayHello;</span><br></pre></td></tr></table></figure></p>
+<p>这里显然不是根据静态类型来决定，因为同是Human类型的man和woman在调用sayHello时执行了不同的行为，导致这个现象原因是这两个变量的实际类型不同，那么JVM是如何根据实际类型来分派方法的执行版本呢？</p>
+<p>其实通过javap命令输出字节码后可以看到无论是调用的指令还是方法参数都一模一样，至于为什么结果不同，还需要从invokevirtual指令的运行时解析过程大致可以分成以下几个步奏。</p>
+<ol>
+<li><p>找到操作数栈顶的第一个元素所指向的对象的实际类型，记C</p>
+</li>
+<li><p>如果在类型C中找到与常量中的描述符和简单名称都相符的方法，则进行访问权限校验，通过则返回方法的直接引用。</p>
+</li>
+<li><p>否则按照继承关系从下往上一次对C的各个父类进行第二步的搜索和验证过程。</p>
+</li>
+<li><p>如果还没有找到合适的方法，就抛出AbstractMethodeError异常。</p>
+</li>
+</ol>
+<p>由于invokevirtual指令执行的第一步就是在运行期确定接受者的实际类型，所以两次调用的invokevirtual指令把常量池中的类方法符号引用解析成了不同的方法的直接引用，这个过程就是方法重写的本质，我们把这种运行期根据实际情况确定方法执行版本的分派称为动态分派。</p>
+<p>java的静态分派是多分派类型，而动态分派则是单分派类型。那么动态分派是怎么实现的呢？</p>
+<p>由于动态分派是非常频繁的动作，而且动态分派的方法版本选择过程就需要在运行时在类的方法元数据搜索合适的方法，因此在JVM实现过程中基于性能的考虑，大部分不会进行如此频繁的搜索，最常用的稳定优化手段就是虚方法表。使用他来代替元数据查找来提高性能。虚方法表如下图：<br><img src="https://i.loli.net/2019/09/04/avlxnIdHtuNbT8p.png" alt="image.png"></p>
+<p>虚方法表存放着各个方法的实际入口地址，如果某个方法在子类中没有被重写，那么子类的虚方法表里面的地址入口和父类相同方法的地址入口是一致的，都指向父类的实现入口，如果子类中重写了方法，子类方法表中的地址就会替换成子类实现版本的入口地址。</p>
+<p>为了程序实现上的方便，具有相同签名的方法在父类，子类的虚方法表中具有一样的索引号，这样当类型变换时，仅需要变更查找的方法表，就可以从不同的虚方法表中转换出所需要的入口地址。方法表一般在类加载的链接阶段进行初始化，准备了类的初始变量值后，虚拟机会把该类的方法表也初始化完毕。</p>
+
       
 
       <!-- 增加版权声明 -->
@@ -1626,171 +386,59 @@ var _hmt = _hmt || [];
 
 
 
- <div class="declare" hidden="hidden"></div>
+ <div class="declare">
+   <strong>本文作者：</strong>
+   
+     Zheng Ruyi
+   
+   <br>
+   <strong>本文链接：</strong>
+   <a rel="license" href="https://zhengruyi.github.io/2019/09/02/JVM方法调用/">https://zhengruyi.github.io/2019/09/02/JVM方法调用/</a>
+   <br>
+   <strong>版权声明：</strong>
+   本作品采用
+   <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+   进行许可。转载请注明出处！
+   
+     <br>
+     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+   
+ </div>
 
 
 <!-- 增加版权声明结束 -->
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/17/算法刷题-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JVM垃圾收集算法" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/JVM垃圾收集算法/">JVM垃圾收集算法</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/13/JVM垃圾收集算法/" class="archive-article-date">
-  	<time datetime="2019-08-13T21:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.7k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">12分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="JVM垃圾收集算法："><a href="#JVM垃圾收集算法：" class="headerlink" title="JVM垃圾收集算法："></a>JVM垃圾收集算法：</h4><p>Java和C++作为后端常用的两门编程语言，他们之间也有一些不同之处，比如C++的内存分配和回收都需要手动进行而在Java中，这个工作则是交给了JVM自己来完成，所以了解它的具体垃圾收集算法就很有必要了，下面我们就来聊聊用的各种垃圾收集算法和垃圾收集器。<br><img src="https://i.loli.net/2019/08/14/DAvpbkK8euGfOIw.png" alt="image.png"><br>从上面的大纲我们可以看到，垃圾收集算法的演变过程大致可以分为三类，标记清除，标记复制和标记整理算法，最后渐渐演变成我们今天常见的分代算法。下面我们来详细解释三种算法的优缺点。<br></p>
-        
-          <a class="article-more-a" href="/2019/08/13/JVM垃圾收集算法/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
       
     </div>
     <div class="article-info article-info-index">
@@ -1823,16 +471,75 @@ var _hmt = _hmt || [];
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/13/JVM垃圾收集算法/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/09/02/JVM方法调用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/01/JVM字节码执行引擎/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM栈帧结构</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1860,10 +567,38 @@ var _hmt = _hmt || [];
 
 
   
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTk2MS8yMjQ3Mg==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+
+
+  
+
+
+
+  
+
+  
+
+  
+
   
 
 
@@ -1890,8 +625,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

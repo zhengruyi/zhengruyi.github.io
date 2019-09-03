@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhengruyi.github.io/2019/09/02/JVM%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/</loc>
+    
+    <lastmod>2019-09-03T21:16:29.812Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhengruyi.github.io/2019/09/01/JVM%E5%AD%97%E8%8A%82%E7%A0%81%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</loc>
     
     <lastmod>2019-09-01T21:58:20.167Z</lastmod>
