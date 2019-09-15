@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 17
+    总文章数 18
 </nav>
 
 
@@ -244,6 +244,168 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Java内存模型和volatile关键字" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/12/Java内存模型和volatile关键字/">Java内存模型</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/09/12/Java内存模型和volatile关键字/" class="archive-article-date">
+  	<time datetime="2019-09-12T21:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.8k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>计算机并发处理任务的能力至关重要，一般采用每秒事务处理数目(TPS)来处理，但是很多任务不能光靠处理就能完成的，至少需要需要与内存进行交互来读取数据和存储结果。但是计算机的存储设备和处理器的运算速度之间有几个数量级的差距，所以现代计算机系统不得不加入一层高速缓存来作为内存和处理器之间的缓冲。</p>
+<p><strong>基于高速缓存的存储很好的解决了处理器与内存的速度矛盾，但也为计算机带来更高的复杂度，因为这带来了一个新的问题：缓存一致性。在多处理器系统中，每个处理器都有自己的高速缓存而他们又共享一块主内存，可能导致各自的缓存数据不一致，如果真的出现这种情况，以哪个数据为准呢？</strong></p>
+<p><img src="https://i.loli.net/2019/09/16/NoHdShPaOy3fvTC.png" alt="image.png"><br></p>
+        
+          <a class="article-more-a" href="/2019/09/12/Java内存模型和volatile关键字/#more">more >></a>
+        
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare" hidden="hidden"></div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/12/Java内存模型和volatile关键字/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-JVM编译优化技术" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -1699,167 +1861,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-算法刷题-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/18/算法刷题-2/">算法刷题-2</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-
-        
-        <a href="/2019/08/18/算法刷题-2/" class="archive-article-date">
-  	<time datetime="2019-08-18T09:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-</div>
-
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不知不觉间这已经是第十篇博客了，希望自己可以坚持下去，加油！算法的确很难，非常🔥脑子，自己现在觉得有一点很重要,<strong>就是读题加上思考可能出现的所有情况</strong>，有些题目情况很复杂，基本思路想起来其很容易，但是要保证自己的程序在各种各样的特殊情况前不崩溃则是非常困难的，所以 尽量多思考特殊情况，最难的的<strong>边界条件的整合</strong>,我很多时候是能想到思路的，但是开始边界条件没考虑齐全使得后面加上越来越多的条件语句,这代码辣眼睛….</p>
-<p>废话太多上题….</p>
-        
-          <a class="article-more-a" href="/2019/08/18/算法刷题-2/#more">more >></a>
-        
-      
-
-      <!-- 增加版权声明 -->
-
-
-      <!-- 百度自动推送方式提交 -->
-            
-              <script>
-              (function(){
-                  var bp = document.createElement('script');
-                  var curProtocol = window.location.protocol.split(':')[0];
-                  if (curProtocol === 'https') {
-                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                  }
-                  else {
-                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                  }
-                  var s = document.getElementsByTagName("script")[0];
-                  s.parentNode.insertBefore(bp, s);
-              })();
-              </script>
-            
-            <!-- 百度自动推送方式提交结束 -->
-
-
-
-
-<div>
-        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
-</div>
-
-
-
- <div class="declare" hidden="hidden"></div>
-
-
-<!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/18/算法刷题-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1983,15 +1984,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Algorithm </a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">

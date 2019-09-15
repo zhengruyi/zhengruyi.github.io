@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhengruyi.github.io/2019/09/12/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/</loc>
+    
+    <lastmod>2019-09-15T20:40:55.433Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhengruyi.github.io/2019/08/12/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
+    
+    <lastmod>2019-09-12T21:43:40.182Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhengruyi.github.io/2019/09/09/JVM%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF/</loc>
     
     <lastmod>2019-09-12T20:43:28.539Z</lastmod>
@@ -103,13 +117,6 @@
     <loc>https://zhengruyi.github.io/2019/08/13/%E9%98%BF%E9%87%8C%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
     
     <lastmod>2019-08-13T20:51:04.027Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhengruyi.github.io/2019/08/12/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
-    
-    <lastmod>2019-08-12T21:05:27.293Z</lastmod>
     
   </url>
   
