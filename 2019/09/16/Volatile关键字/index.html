@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://zhengruyi.github.io">
-  <title>Archives | 巴黎 ITer~ |Ruyi.Blog</title>
+  <title>Volatile关键字 | 巴黎 ITer~ |Ruyi.Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="巴黎 ITer~ |Ruyi.Blog">
-<meta property="og:url" content="https://zhengruyi.github.io/archives/index.html">
+  <meta name="description" content="前言：关键字volatile可以说是JVM提供的最轻量级的同步机制，java内存模型针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性： 1.可见性：保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Volatile关键字">
+<meta property="og:url" content="https://zhengruyi.github.io/2019/09/16/Volatile关键字/index.html">
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
+<meta property="og:description" content="前言：关键字volatile可以说是JVM提供的最轻量级的同步机制，java内存模型针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性： 1.可见性：保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-18T20:40:53.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="巴黎 ITer~ |Ruyi.Blog">
+<meta name="twitter:title" content="Volatile关键字">
+<meta name="twitter:description" content="前言：关键字volatile可以说是JVM提供的最轻量级的同步机制，java内存模型针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性： 1.可见性：保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运">
   
     <link rel="alternative" href="/atom.xml" title="巴黎 ITer~ |Ruyi.Blog" type="application/atom+xml">
   
@@ -243,36 +248,193 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Volatile关键字" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Volatile关键字
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/16/Volatile关键字/" class="archive-article-date">
+
+        <!--显示阅读次数-->
+
+ <br>
+ <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+ <span class="icon-sort"></span>
+ <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+ </span>
+ </a>
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/09/16/Volatile关键字/" class="archive-article-date">
   	<time datetime="2019-09-16T20:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/16/Volatile关键字/">Volatile关键字</a>
-    </h1>
-  
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.1k字</span>
+      </span>
+    </span>
 
-        <div class="article-info info-on-right">
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
+
           
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>关键字volatile可以说是JVM提供的最轻量级的同步机制，<a href="https://zhengruyi.github.io/2019/09/12/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">java内存模型</a>针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性：</p>
+<h5 id="1-可见性："><a href="#1-可见性：" class="headerlink" title="1.可见性："></a>1.可见性：</h5><p>保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运算在并发条件下都是安全的，volatile变量在各个线程的工作内存中不存在一致性的问题（在各个线程的工作内存可能会有不一致的情况，但是由于每次volatile变量的运算都需要从内存里重新加载，所以执行引擎也就看不到不一致的情况），但由于java里面的运算并不是原子的，导致volatile变量在并发情况下也不一定是安全的。<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">volatile a=<span class="number">0</span><span class="comment">;</span></span><br><span class="line">a++<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>但是由于自增运算符实际上有三条字节码指令，读取当前值，增加1，在完成赋值操作才能完成自增操作，所以由于volatile变量只能保证可见性，所以在不符合以下两条规则中的运算场景中，我们仍然需要通过加锁来保证原子性：</p>
+<ol>
+<li><p>运算结果并不依赖变量的当前值，或者确保当前只有一个线程可以修改变量的值</p>
+</li>
+<li><p>变量不需要与其他状态变量共同参与不变约束</p>
+</li>
+</ol>
+<h5 id="禁止指令重排序优化："><a href="#禁止指令重排序优化：" class="headerlink" title="禁止指令重排序优化："></a>禁止指令重排序优化：</h5><p>普通的变量仅仅会保证在该方法的执行过程中所有依赖赋值的地方都能获取到正确的结果，而不能保证变量赋值的操作顺序和代码里的执行顺序一致。</p>
+<p>被volatile变量修饰的变量在赋值语句后多执行了一个”lock addl $0x0”操作，这个操作相当于一个<strong>内存屏障</strong>，指令重排序时不能把后面的指令重排序到内存屏障之前的位置，只有一个cpu来访问内存时就不需要内存屏障，但如果有两个或者更多CPU访问同一块内存，且其中一个在观测另一个就需要内存屏障来保证一致性了。其中”lock”指令的作用是使本CPU的cahce写入内存，该写入动作也会引起别的cpu或者别的内核无效化它的cache,这种操作相当于对cache中的变量做一次前面java内存模型中的store和write操作，所以通过这样一个操作，可以让前面的volatile 变量的修改对其他cpu立即可见。</p>
+<p>那为什么说它禁止指令重排序呢？从硬件架构上来说，指令重排序就是指CPU采用了允许将多条指令不按程序规定的顺序发送给相应的电路单元处理，但并不是说指令任意重排，cpu需要能正确处理指令依赖情况以保证程序可以得出正确的执行结果，比如指令1把寄存器里的值加上10，指令2把寄存器的值乘以2，指令3把另一个寄存器里的值减去3.可以看出指令1和指令2之间是有依赖的，他们之间的相对顺序不可以改变，但是指令3可以重排序到1和2中间或者指令1之前。所以在本cpu看来指令依然是有序的，因此 “lock addl $0x0”把修改同步到内存，意味着所有之前的操作都完成了，这样就形成了指令重排序无法越过内存屏障的效果。</p>
+<p>在某些情况下，volatile的同步机制性能要优于锁，如果让volatile自己与自己比较，可以确定，volatile变量的读操作性能与普通变量的性能几乎没差别，但是写操作会慢一些，因为需要在代码中插入很多内存屏障指令来确保不会乱序执行。</p>
+<p>java内存模型是围绕在并发过程中如何处理原子性，可见性，有序性三个特征来建立的：</p>
+<h5 id="原子性："><a href="#原子性：" class="headerlink" title="原子性："></a>原子性：</h5><p>内存模型直接保证原子性变量操作包括，read,load,assign,use,store,write，我们可以大致认为基本数据类型的访问读写具备原子性。在场景需要一个更大范围的原子性保证，JVM提供了monitorenter和monitorexit两字字节码指令来保证，这两个字节码指令反应到java代码中就是同步块-synchronized关键字，因此在synchronized块之间的操作也具有原子性。</p>
+<h5 id="可见性："><a href="#可见性：" class="headerlink" title="可见性："></a>可见性：</h5><p>可见性指当一个线程修改了共享变量的值，其他行程可以立即得知这个修改，java内存模型通过变量修改后将新值同步回内存，在变量读取前从主内存刷新变量值这种依赖主内存作为传递媒介的方式来实现可见性。另外synchronized和final关键字也可以实现关键性，同步块的可见性由对一个变量执行unlock操作前必须把此变量同步回主内存来进行保证，而final则因为不可变性，无需同步就可以被其他线程正确访问。</p>
+<h5 id="有序性："><a href="#有序性：" class="headerlink" title="有序性："></a>有序性：</h5><p>java程序天然的有序性可以概括为：如果在本线程内观察，所有操作都是有序的，如果在另一个线程中观察本线程，所有操作都是无序的，前半句指线程内表现为串行的语义，后半句指指令重排序现象和工作内存和主内存同步延迟现象。java提供volatile和synchronized关键字，volatile关键字包含指令重排序而synchronized操作则由一个变量在同一时刻只允许一个线程对其lock这条规则获得，这条规则决定了持有同一个锁的两个同步块只能串行进入。</p>
+<h4 id="先行发生原则："><a href="#先行发生原则：" class="headerlink" title="先行发生原则："></a>先行发生原则：</h4><p>定义:<strong>先行发生时java内存模型定义的两项操作之间的偏序关系，如果A操作先行发生于操作B,其实在说在发生操作B之前，操作A产生的影响可以被操作B观察到，影响包括修改共享变量的值，发送了消息或者调用了方法等</strong></p>
+<p>下面列出一些java内存模型中天然存在的一些先行发生关系，这些先行发生关系无需同步就已经保证，如果两个操作的关系不在此列，那他们就没有顺序保障，虚拟机可以任意重排序：</p>
+<ol>
+<li><p>程序次序原则： 在一个线程内，按照程序代码的顺序，书写在前面的操作先行发生于后面的操作。</p>
+</li>
+<li><p>管城锁定原则：一个unlock操作先行发生于后面对同一个锁的lock操作，注意这里必须是同一个锁。</p>
+</li>
+<li><p>volatile变量规则：对一个变量的写操作先行发生于对一个变量的读操作。</p>
+</li>
+<li><p>线程启动原则：Thread对象的start()方法先行发生于此线程的每一个动作</p>
+</li>
+<li><p>线程终止原则：线程中的所有操作都先行发生于对此线程的终止检测。可以用Thread.isAlive()的返回值手段检测到县城已经终止。</p>
+</li>
+<li><p>线程中断规则：对线程的interrupt方法的先行发生于中断线程的代码检测到中断事件的发生。</p>
+</li>
+<li><p>对象终结原则：一个对象的初始化完成方法先行发生于finalize()方法的开始。</p>
+</li>
+<li><p>传递性规则： 如果操作A先行发生于操作B,操作B先行发生于操作C,那么操作A先行发生于操作C的结论。</p>
+</li>
+</ol>
+<p>我们可以得到的结论是:一个操作时间上的先发生不代表这个操作会先行发生，一个操作的先行发生也不能推出时间上的先行发生。时间先后顺序和先行发生原则基本没有太大的关系，所以我们衡量并发安全问题不要受到时间顺序的干扰，一切以先行发生原则为准。</p>
+
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare">
+   <strong>本文作者：</strong>
+   
+     Zheng Ruyi
+   
+   <br>
+   <strong>本文链接：</strong>
+   <a rel="license" href="https://zhengruyi.github.io/2019/09/16/Volatile关键字/">https://zhengruyi.github.io/2019/09/16/Volatile关键字/</a>
+   <br>
+   <strong>版权声明：</strong>
+   本作品采用
+   <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+   进行许可。转载请注明出处！
+   
+     <br>
+     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>
+   
+ </div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechat_pay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -284,7 +446,9 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -297,461 +461,135 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhengruyi.github.io/2019/09/16/Volatile关键字/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/12/Java内存模型和volatile关键字/" class="archive-article-date">
-  	<time datetime="2019-09-12T21:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/12/Java内存模型和volatile关键字/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java内存模型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/12/Java内存模型和volatile关键字/">Java内存模型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
+
+
+
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/09/JVM编译优化技术/" class="archive-article-date">
-  	<time datetime="2019-09-09T21:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/09/JVM编译优化技术/">JVM编译优化技术</a>
-    </h1>
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NTk2MS8yMjQ3Mg==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/08/JVM-运行期优化/" class="archive-article-date">
-  	<time datetime="2019-09-08T20:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/08/JVM-运行期优化/">JVM 运行期优化</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/04/JVM字节码执行引擎/" class="archive-article-date">
-  	<time datetime="2019-09-04T20:26:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/04/JVM字节码执行引擎/">JVM字节码执行引擎和编译优化</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/JVM方法调用/" class="archive-article-date">
-  	<time datetime="2019-09-02T20:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/JVM方法调用/">JVM方法调用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/Rdeis基本数据类型-二/" class="archive-article-date">
-  	<time datetime="2019-08-27T19:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/Rdeis基本数据类型-二/">Rdeis基本数据类型-下</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/26/Redis基本数据类型/" class="archive-article-date">
-  	<time datetime="2019-08-26T19:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/26/Redis基本数据类型/">Redis基本数据类型-上</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/算法刷题-3/" class="archive-article-date">
-  	<time datetime="2019-08-25T19:04:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/算法刷题-3/">算法刷题-3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Algorithm </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/20/ArrayList-LinkedList/" class="archive-article-date">
-  	<time datetime="2019-08-20T19:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/20/ArrayList-LinkedList/">ArrayList&lt;--&gt;LinkedList</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataStructure </a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java源代码分析//" class="article-tag-list-link color5">Java源代码分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -779,8 +617,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

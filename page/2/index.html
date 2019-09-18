@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
 		</nav>
 
 <nav class="love-time">
-    总文章数 18
+    总文章数 19
 </nav>
 
 
@@ -244,6 +244,168 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JVM类加载过程" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/18/JVM类加载过程/">JVM类加载过程</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+
+        
+        <a href="/2019/08/18/JVM类加载过程/" class="archive-article-date">
+  	<time datetime="2019-08-18T18:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">14分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JVM类加载过程："><a href="#JVM类加载过程：" class="headerlink" title="JVM类加载过程："></a>JVM类加载过程：</h3><p> 当我们编写好的类经过编译后就会变成.class文件，这些文件需要被JVM加载到内存中解释并执行，后续我会再写一篇文章来描述.class文件的结构,因为class文件结构相对比较复杂，而且面试考到的也不多，所以下次在写，这次先来讲讲类是怎么加载的? </p>
+<p>类从被加载到虚拟机内存开始，到卸载出内存为止，整个生命周期包括<strong>加载，验证，准备，解析，初始化，使用和卸载</strong>总共7个阶段，而其中验证，准备和解析可以统称为<strong>连接</strong>。</p>
+<p>那什么时候JVM知道类需要被加载进去呢？可不是一股脑全部加载进去，既浪费内存也拖慢了机器执行速度。准确来说遇到以下五种情况，JVM会启动类加载进程。<br></p>
+        
+          <a class="article-more-a" href="/2019/08/18/JVM类加载过程/#more">more >></a>
+        
+      
+
+      <!-- 增加版权声明 -->
+
+
+      <!-- 百度自动推送方式提交 -->
+            
+              <script>
+              (function(){
+                  var bp = document.createElement('script');
+                  var curProtocol = window.location.protocol.split(':')[0];
+                  if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                  }
+                  else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(bp, s);
+              })();
+              </script>
+            
+            <!-- 百度自动推送方式提交结束 -->
+
+
+
+
+<div>
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive;">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+</div>
+
+
+
+ <div class="declare" hidden="hidden"></div>
+
+
+<!-- 增加版权声明结束 -->
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JVM//" class="article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/18/JVM类加载过程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-算法刷题-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
