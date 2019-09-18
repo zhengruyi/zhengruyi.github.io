@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="巴黎 ITer~ |Ruyi.Blog">
 <meta property="og:description" content="前言：关键字volatile可以说是JVM提供的最轻量级的同步机制，java内存模型针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性： 1.可见性：保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-18T20:40:53.773Z">
+<meta property="og:updated_time" content="2019-09-18T20:44:27.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile关键字">
 <meta name="twitter:description" content="前言：关键字volatile可以说是JVM提供的最轻量级的同步机制，java内存模型针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性： 1.可见性：保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运">
@@ -307,6 +307,7 @@ var _hmt = _hmt || [];
       
         <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>关键字volatile可以说是JVM提供的最轻量级的同步机制，<a href="https://zhengruyi.github.io/2019/09/12/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">java内存模型</a>针对volatile定义了一些特殊的访问规则，当一个变量被定义为volatile后，就具备两种特性：</p>
 <h5 id="1-可见性："><a href="#1-可见性：" class="headerlink" title="1.可见性："></a>1.可见性：</h5><p>保证此变量对所有线程的可见性，即当一个线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的，而普通变量则做不到这点，普通变量的值在线程间传递需要依靠主内存来完成。所有基于volatile变量的运算在并发条件下都是安全的，volatile变量在各个线程的工作内存中不存在一致性的问题（在各个线程的工作内存可能会有不一致的情况，但是由于每次volatile变量的运算都需要从内存里重新加载，所以执行引擎也就看不到不一致的情况），但由于java里面的运算并不是原子的，导致volatile变量在并发情况下也不一定是安全的。<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">volatile a=<span class="number">0</span><span class="comment">;</span></span><br><span class="line">a++<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>但是由于自增运算符实际上有三条字节码指令，读取当前值，增加1，在完成赋值操作才能完成自增操作，所以由于volatile变量只能保证可见性，所以在不符合以下两条规则中的运算场景中，我们仍然需要通过加锁来保证原子性：</p>
 <ol>
 <li><p>运算结果并不依赖变量的当前值，或者确保当前只有一个线程可以修改变量的值</p>
